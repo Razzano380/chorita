@@ -10,6 +10,10 @@ window.DADOS = {
     { data: "2026-05-23", titulo: "Primeira conversa", texto: "Início das tratativas." },
     { data: "2026-06-25", titulo: "Primeiro encontro", texto: "Primeira reunião presencial. Resultado: nova reunião agendada." },
     { data: "2026-09-14", titulo: "Primeiro “eu te amo”", texto: "Declaração feita e recebida. Irrevogável." },
+    // os três primeiros acima alimentam os contadores; os demais só entram na linha do tempo
+    { data: "2026-08-17", titulo: "Ibirapuera, de skate", texto: "Manobras filmadas no Ibira. Dia mais marcante, segundo o contratante (Anexo IV)." },
+    { data: "2026-08-28", titulo: "A noite que virou manhã", texto: "Conversa, filme e bar, até umas 6h30. Dia mais marcante, segundo o contratante (Anexo IV)." },
+    { data: "2026-09-11", titulo: "Flores e fondue", texto: "Dia mais marcante, segundo a contratada (Anexo IV)." },
   ],
 
   requisitos: [
@@ -77,8 +81,8 @@ window.DADOS = {
 
   // Anexo IV. "parte": "contratante" ou "contratada". Com "data", as fotos daquele dia aparecem junto.
   marcantes: [
-    { parte: "contratante", data: "2026-09-26", titulo: "Ibirapuera, de skate", texto: "O dia no Ibira filmando as manobras de skate." },
-    { parte: "contratante", data: "2026-09-19", titulo: "A noite que virou manhã", texto: "Acordados até umas 6h30: conversa, filme e, no fim, o bar." },
+    { parte: "contratante", data: "2026-08-17", titulo: "Ibirapuera, de skate", texto: "O dia no Ibira filmando as manobras de skate." },
+    { parte: "contratante", data: "2026-08-28", titulo: "A noite que virou manhã", texto: "Acordados até umas 6h30: conversa, filme e, no fim, o bar." },
     { parte: "contratada", data: "2026-09-11", titulo: "Flores e fondue", texto: "O dia em que recebeu flores e a noite terminou em fondue." },
   ],
 
