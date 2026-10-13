@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contrato da Chorita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --papel: #f7f2ea;
+    --folha: #fffdf8;
+    --tinta: #2b2522;
+    --suave: #7a6e66;
+    --linha: #e2d8cb;
+    --vinho: #8c2f39;
+    --sombra: 0 1px 2px rgba(60, 40, 30, .08), 0 8px 24px rgba(60, 40, 30, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --papel: #1c1917; --folha: #24201d; --tinta: #eee6dc; --suave: #a89c92;
+      --linha: #3a332e; --vinho: #e0848f; --sombra: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --papel: #1c1917; --folha: #24201d; --tinta: #eee6dc; --suave: #a89c92;
+    --linha: #3a332e; --vinho: #e0848f; --sombra: none;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--papel); color: var(--tinta);
+    font: 19px/1.6 "EB Garamond", Georgia, "Times New Roman", serif;
+  }
+  .folha {
+    max-width: 760px; margin: 40px auto; padding: 56px 64px;
+    background: var(--folha); box-shadow: var(--sombra); border: 1px solid var(--linha);
+  }
+  @media (max-width: 640px) { .folha { margin: 0; padding: 32px 16px; border: 0; } body { font-size: 18px; } }
+
+  header { text-align: center; border-bottom: 1px solid var(--linha); padding-bottom: 28px; margin-bottom: 32px; }
+  .selo { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--vinho); }
+  h1 { font-weight: 600; font-size: 34px; line-height: 1.2; margin: 10px 0 6px; }
+  .sub { color: var(--suave); font-style: italic; margin: 0; }
+
+  h2 {
+    font-size: 15px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+    color: var(--vinho); margin: 48px 0 14px;
+  }
+  h2 small { display: block; font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--tinta); font-weight: 600; margin-top: 2px; }
+  p { margin: 0 0 14px; }
+  .partes p { text-indent: 0; }
+  strong { font-weight: 600; }
+
+  /* contadores */
+  .contadores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 8px; }
+  .contador { border: 1px solid var(--linha); padding: 14px 10px; text-align: center; }
+  .contador b { display: block; font-size: 32px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .contador span { font-size: 14px; color: var(--suave); }
+  @media (max-width: 480px) { .contadores { grid-template-columns: 1fr; } }
+
+  /* linha do tempo */
+  .timeline { list-style: none; margin: 24px 0 0; padding: 0 0 0 28px; border-left: 1px solid var(--linha); }
+  .evento { position: relative; margin: 0 0 34px; }
+  .evento::before {
+    content: ""; position: absolute; left: -33px; top: 9px; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--folha); border: 1px solid var(--vinho);
+  }
+  .evento.marco::before { background: var(--vinho); }
+  .evento.hoje::before { border-style: dashed; }
+  .data { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--suave); }
+  .evento h3 { margin: 2px 0 4px; font-size: 22px; font-weight: 600; }
+  .evento p { margin: 0; }
+  .midias { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+
+  figure { margin: 0; }
+  .miniatura {
+    display: block; padding: 0; border: 1px solid var(--linha); background: var(--folha);
+    cursor: zoom-in; width: 140px; position: relative;
+  }
+  .miniatura img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .miniatura .play {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: #fff; font-size: 30px; text-shadow: 0 1px 6px rgba(0,0,0,.5);
+  }
+  figcaption { font-size: 14px; color: var(--suave); font-style: italic; padding: 4px 2px 0; max-width: 140px; }
+
+  .album { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 14px; margin-top: 16px; }
+  .album .miniatura, .album figcaption { width: 100%; max-width: none; }
+  .aviso { font-size: 15px; color: var(--suave); border-left: 2px solid var(--vinho); padding-left: 12px; }
+
+  /* listas do contrato */
+  ol.clausulas { padding-left: 0; list-style: none; counter-reset: item; margin: 0; }
+  ol.clausulas > li { counter-increment: item; padding-left: 44px; position: relative; margin-bottom: 12px; }
+  ol.clausulas > li::before {
+    content: counter(item, upper-roman) "."; position: absolute; left: 0; color: var(--vinho); font-weight: 600;
+  }
+  .ok { color: var(--vinho); font-weight: 600; }
+  .nota { color: var(--suave); font-style: italic; }
+
+  /* assinaturas */
+  .assinaturas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+  @media (max-width: 560px) { .assinaturas { grid-template-columns: 1fr; } }
+  .assinatura { text-align: center; }
+  .assinatura .linha {
+    min-height: 54px; border-bottom: 1px solid var(--tinta);
+    display: flex; align-items: flex-end; justify-content: center;
+    font-style: italic; font-size: 28px; color: var(--vinho); padding-bottom: 2px;
+  }
+  .assinatura .quem { margin-top: 6px; font-size: 16px; }
+  .assinatura .quando { font-size: 14px; color: var(--suave); min-height: 20px; }
+  button.assinar {
+    margin-top: 10px; font: inherit; font-size: 16px; padding: 6px 18px; cursor: pointer;
+    background: transparent; color: var(--vinho); border: 1px solid var(--vinho);
+  }
+  button.assinar:hover { background: var(--vinho); color: var(--folha); }
+  button.assinar[hidden] { display: none; }
+
+  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--linha); text-align: center; font-size: 14px; color: var(--suave); }
+
+  /* visualizador */
+  dialog {
+    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh;
+  }
+  dialog::backdrop { background: rgba(20, 15, 12, .88); }
+  dialog img, dialog video { display: block; max-width: 94vw; max-height: 86vh; }
+  dialog p { color: #eee6dc; text-align: center; font-style: italic; margin: 8px 0 0; }
+  dialog form { position: fixed; top: 12px; right: 16px; }
+  dialog form button { font: 28px/1 Georgia, serif; background: none; border: 0; color: #fff; cursor: pointer; }
+
+  @media print {
+    body { background: #fff; }
+    .folha { box-shadow: none; border: 0; margin: 0; }
+    button.assinar { display: none; }
+  }
+</style>
+</head>
+<body>
+<main class="folha">
+  <header>
+    <div class="selo">Instrumento particular</div>
+    <h1>Contrato de Namoro</h1>
+    <p class="sub" id="subtitulo"></p>
+  </header>
+
+  <section class="partes" id="partes"></section>
+
+  <div class="contadores" id="contadores"></div>
+
+  <h2>Cláusula primeira <small>Do histórico</small></h2>
+  <p>As partes declaram, para os devidos fins, o seguinte histórico:</p>
+  <ol class="timeline" id="timeline"></ol>
+
+  <section id="secao-album">
+    <h2>Anexo I <small>Acervo fotográfico (datas a confirmar)</small></h2>
+    <p class="aviso">Estas fotos chegaram sem a data original nos metadados. Rode o <code>extrair_metadados.py</code> nos arquivos originais, ou escreva a data à mão no <code>midia.js</code>, e elas sobem para a linha do tempo.</p>
+    <div class="album" id="album"></div>
+  </section>
+
+  <h2>Cláusula segunda <small>Dos requisitos da vaga</small></h2>
+  <p>Requisitos da vaga, verificados um a um:</p>
+  <ol class="clausulas" id="requisitos"></ol>
+
+  <h2>Cláusula terceira <small>Dos benefícios</small></h2>
+  <p>Ficam assegurados à contratada:</p>
+  <ol class="clausulas" id="beneficios"></ol>
+
+  <h2>Cláusula quarta <small>Do dia a dia</small></h2>
+  <p>As partes se comprometem mutuamente a:</p>
+  <ol class="clausulas" id="dia-a-dia"></ol>
+
+  <h2>Cláusula quinta <small>Da vigência</small></h2>
+  <p id="vigencia"></p>
+
+  <p style="margin-top:32px">E, por estarem de pleno acordo, assinam o presente instrumento.</p>
+  <p class="nota" id="local-data"></p>
+
+  <div class="assinaturas" id="assinaturas"></div>
+
+  <footer>Documento sem validade jurídica.</footer>
+</main>
+
+<dialog id="visualizador">
+  <form method="dialog"><button aria-label="Fechar">×</button></form>
+  <div id="visualizador-conteudo"></div>
+  <p id="visualizador-legenda"></p>
+</dialog>
+
+<script src="dados.js"></script>
+<script src="midia.js"></script>
+<script>
+(() => {
+  const D = window.DADOS;
+  const M = window.MIDIA || [];
+  const { contratante: eu, contratada: ela } = D.partes;
+  const $ = (id) => document.getElementById(id);
+  const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+  const paraData = (s) => {
+    const [d, h] = s.split("T");
+    const [a, m, dia] = d.split("-").map(Number);
+    const [hh, mm] = (h || "00:00").split(":").map(Number);
+    return new Date(a, m - 1, dia, hh, mm);
+  };
+  const extenso = (dt) => `${dt.getDate()} de ${MESES[dt.getMonth()]} de ${dt.getFullYear()}`;
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  const diasDesde = (s) => Math.round((hoje - paraData(s.slice(0, 10))) / 86400000);
+  const el = (tag, attrs = {}, ...filhos) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) k === "class" ? n.className = v : n.setAttribute(k, v);
+    for (const f of filhos) n.append(f);
+    return n;
+  };
+
+  // cabeçalho e partes
+  $("subtitulo").textContent = `entre ${eu.apelido} e ${ela.apelido}`;
+  $("partes").innerHTML = "";
+  $("partes").append(
+    el("p", {}, el("strong", {}, "CONTRATANTE: "), `${eu.nome}, doravante chamado de “${eu.apelido}”.`),
+    el("p", {}, el("strong", {}, "CONTRATADA: "), `${ela.nome}, doravante chamada de “${ela.apelido}”.`),
+    el("p", {}, el("strong", {}, "OBJETO: "), "o namoro entre as partes."),
+  );
+
+  // contadores (usa os três primeiros marcos)
+  const rotulos = ["dias desde a primeira mensagem", "dias desde o primeiro date", "dias desde o primeiro “eu te amo”"];
+  D.marcos.slice(0, 3).forEach((m, i) => {
+    $("contadores").append(el("div", { class: "contador" }, el("b", {}, String(diasDesde(m.data))), el("span", {}, rotulos[i] || m.titulo)));
+  });
+
+  // visualizador
+  const dlg = $("visualizador");
+  const abrir = (m) => {
+    const alvo = $("visualizador-conteudo");
+    alvo.innerHTML = "";
+    alvo.append(m.tipo === "video"
+      ? el("video", { src: m.arquivo, controls: "", autoplay: "", playsinline: "" })
+      : el("img", { src: m.arquivo, alt: m.legenda || "" }));
+    $("visualizador-legenda").textContent = m.legenda || "";
+    dlg.showModal();
+  };
+  dlg.addEventListener("close", () => { $("visualizador-conteudo").innerHTML = ""; });
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+
+  const miniatura = (m) => {
+    const b = el("button", { class: "miniatura", type: "button", "aria-label": m.legenda || "Abrir" },
+      el("img", { src: m.capa || m.arquivo, alt: m.legenda || "", loading: "lazy" }));
+    if (m.tipo === "video") b.append(el("span", { class: "play" }, "▶"));
+    b.addEventListener("click", () => abrir(m));
+    return el("figure", {}, b, el("figcaption", {}, m.legenda || ""));
+  };
+
+  // linha do tempo: marcos + mídias com data, agrupadas por dia
+  const eventos = D.marcos.map((m) => ({ ...m, marco: true, midias: [] }));
+  const porDia = new Map(eventos.map((e) => [e.data, e]));
+  const semData = [];
+  for (const m of M) {
+    if (!m.data) { semData.push(m); continue; }
+    const dia = m.data.slice(0, 10);
+    if (!porDia.has(dia)) {
+      const ev = { data: dia, titulo: "", texto: "", midias: [] };
+      porDia.set(dia, ev); eventos.push(ev);
+    }
+    porDia.get(dia).midias.push(m);
+  }
+  eventos.sort((a, b) => a.data.localeCompare(b.data));
+
+  for (const ev of eventos) {
+    const dt = paraData(ev.data);
+    const titulo = ev.titulo || (ev.midias.length === 1 ? ev.midias[0].legenda : "Registro");
+    const li = el("li", { class: "evento" + (ev.marco ? " marco" : "") },
+      el("div", { class: "data" }, extenso(dt)),
+      el("h3", {}, titulo));
+    if (ev.texto) li.append(el("p", {}, ev.texto));
+    if (ev.midias.length) li.append(el("div", { class: "midias" }, ...ev.midias.map(miniatura)));
+    $("timeline").append(li);
+  }
+  $("timeline").append(el("li", { class: "evento hoje" },
+    el("div", { class: "data" }, extenso(hoje)),
+    el("h3", {}, "Hoje"),
+    el("p", {}, "Contrato em vigor.")));
+
+  if (semData.length) semData.forEach((m) => $("album").append(miniatura(m)));
+  else $("secao-album").remove();
+
+  // cláusulas
+  for (const r of D.requisitos) $("requisitos").append(el("li", {}, r.texto + " — ", el("span", { class: "ok" }, "atende."), r.nota ? el("span", { class: "nota" }, " " + r.nota) : ""));
+  for (const b of D.beneficios) $("beneficios").append(el("li", {}, el("strong", {}, b.titulo + ". "), b.texto));
+  for (const t of D.diaADia) $("dia-a-dia").append(el("li", {}, t));
+  $("vigencia").textContent = D.vigencia;
+  $("local-data").textContent = `São Paulo, ${extenso(hoje)}.`;
+
+  // assinaturas (ficam salvas neste navegador)
+  const ler = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const gravar = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
+  for (const [chave, p] of [["assinatura-contratante", eu], ["assinatura-contratada", ela]]) {
+    const linha = el("div", { class: "linha" });
+    const quando = el("div", { class: "quando" });
+    const botao = el("button", { class: "assinar", type: "button" }, `Assinar como ${p.apelido}`);
+    const mostrar = (iso) => {
+      linha.textContent = p.apelido;
+      quando.textContent = "assinado em " + new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+      botao.hidden = true;
+    };
+    const salvo = ler(chave);
+    if (salvo) mostrar(salvo);
+    botao.addEventListener("click", () => { const agora = new Date().toISOString(); gravar(chave, agora); mostrar(agora); });
+    $("assinaturas").append(el("div", { class: "assinatura" }, linha, el("div", { class: "quem" }, p.nome), quando, botao));
+  }
+})();
+</script>
+</body>
+</html>
