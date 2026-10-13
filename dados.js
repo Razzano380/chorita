@@ -75,5 +75,12 @@ window.DADOS = {
     { titulo: "Emergência 53", ano: "2026", genero: "Drama médico", pais: "Brasil", status: "Em andamento" },
   ],
 
+  // Anexo IV. "parte": "contratante" ou "contratada". Com "data", as fotos daquele dia aparecem junto.
+  marcantes: [
+    { parte: "contratante", data: "2026-09-26", titulo: "Ibirapuera, de skate", texto: "O dia no Ibira filmando as manobras de skate." },
+    { parte: "contratante", data: "2026-09-19", titulo: "A noite que virou manhã", texto: "Acordados até umas 6h30: conversa, filme e, no fim, o bar." },
+    { parte: "contratada", data: "2026-09-11", titulo: "Flores e fondue", texto: "O dia em que recebeu flores e a noite terminou em fondue." },
+  ],
+
   vigencia: "Prazo indeterminado, renovado automaticamente a cada dia. Alterações somente por acordo entre as partes.",
 };

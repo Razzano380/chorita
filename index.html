@@ -134,6 +134,14 @@
   .legenda b { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 6px; }
   .legenda small { color: var(--suave); font-size: 14px; }
 
+  .marcantes { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
+  @media (max-width: 640px) { .marcantes { grid-template-columns: 1fr; } }
+  .marcantes h3 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin: 0 0 4px; }
+  .marcante { padding: 14px 0; border-bottom: 1px solid var(--linha); }
+  .marcante h4 { margin: 2px 0 4px; font-size: 20px; font-weight: 600; }
+  .marcante p { margin: 0; }
+  .marcante .midias figure .miniatura, .marcante .midias figcaption { width: 96px; }
+
   .sumario { border: 1px solid var(--linha); padding: 14px 18px; margin: 0 0 8px; font-size: 16px; }
   .sumario b { display: block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin-bottom: 4px; }
   .sumario ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; }
@@ -196,6 +204,7 @@
       <li><a href="#a1">Anexo I: Indicadores</a></li>
       <li><a href="#a2">Anexo II: Registro gastronômico</a></li>
       <li><a href="#a3">Anexo III: Registro audiovisual</a></li>
+      <li><a href="#a4">Anexo IV: Dias mais marcantes</a></li>
     </ol>
   </nav>
 
@@ -264,6 +273,12 @@
       <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>Situação</th></tr></thead>
       <tbody id="series"></tbody>
     </table>
+  </section>
+
+  <section class="anexo">
+    <h2 id="a4">Anexo IV <small>Dias mais marcantes</small></h2>
+    <p>Cada parte declara, de próprio punho, o dia mais marcante vivido com a outra:</p>
+    <div class="marcantes" id="marcantes"></div>
   </section>
 
   <footer>Documento sem validade jurídica.</footer>
@@ -468,6 +483,20 @@
       el("td", {}, f.sub ? `${f.genero} · ${f.sub}` : f.genero), el("td", {}, f.pais)));
   for (const x of series)
     $("series").append(el("tr", {}, el("td", {}, String(x.ano)), el("td", {}, x.titulo), el("td", {}, x.genero), el("td", {}, x.status)));
+
+  // Anexo IV: dias mais marcantes
+  for (const [parte, p] of [["contratante", eu], ["contratada", ela]]) {
+    const coluna = el("div", {}, el("h3", {}, `${parte === "contratante" ? "Contratante" : "Contratada"} · ${p.apelido}`));
+    for (const d of (D.marcantes || []).filter((x) => x.parte === parte)) {
+      const item = el("div", { class: "marcante" });
+      if (d.data) item.append(el("div", { class: "data" }, extenso(paraData(d.data))));
+      item.append(el("h4", {}, d.titulo), el("p", {}, d.texto));
+      const fotos = d.data ? M.filter((m) => m.data && m.data.startsWith(d.data)) : [];
+      if (fotos.length) item.append(el("div", { class: "midias" }, ...fotos.map(miniatura)));
+      coluna.append(item);
+    }
+    $("marcantes").append(coluna);
+  }
 
   // cláusulas
   for (const r of D.requisitos) $("requisitos").append(el("li", {}, r.texto + " — ", el("span", { class: "ok" }, "atende."), r.nota ? el("span", { class: "nota" }, " " + r.nota) : ""));
