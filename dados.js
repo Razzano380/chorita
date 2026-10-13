@@ -43,5 +43,23 @@ window.DADOS = {
     { data: "2026-09-19", nome: "Restaurante a confirmar", tipo: "Comida brasileira", pedido: "Feijoada e suco" },
   ],
 
+  // Anexo III. "genero" alimenta o gráfico; "pais" também.
+  filmes: [
+    { titulo: "Resident Evil", ano: 2026, genero: "Terror", sub: "Zumbis", pais: "EUA" },
+    { titulo: "A Hora do Mal (Weapons)", ano: 2025, genero: "Terror", sub: "Mistério", pais: "EUA" },
+    { titulo: "Bacurau", ano: 2019, genero: "Faroeste", sub: "Ficção científica", pais: "Brasil" },
+    { titulo: "Extermínio: A Evolução (28 Years Later)", ano: 2025, genero: "Terror", sub: "Infectados", pais: "Reino Unido" },
+    { titulo: "A Substância (The Substance)", ano: 2024, genero: "Terror", sub: "Horror corporal", pais: "França" },
+    { titulo: "Forbidden Fruits", ano: 2026, genero: "Terror", sub: "Comédia de terror", pais: "EUA" },
+    { titulo: "Sorria (Smile)", ano: 2022, genero: "Terror", sub: "Sobrenatural", pais: "EUA" },
+    { titulo: "Quando o Mal Espreita (When Evil Lurks)", ano: 2023, genero: "Terror", sub: "Possessão", pais: "Argentina" },
+    { titulo: "Obsession", ano: 2026, genero: "Terror", sub: "Psicológico", pais: "EUA" },
+    { titulo: "Oldboy", ano: 2003, genero: "Suspense", sub: "Vingança", pais: "Coreia do Sul" },
+  ],
+  series: [
+    { titulo: "O Verão que Mudou Minha Vida", ano: "2022–2025", genero: "Romance", pais: "EUA", status: "Concluída" },
+    { titulo: "Emergência 53", ano: "2026", genero: "Drama médico", pais: "Brasil", status: "Em andamento" },
+  ],
+
   vigencia: "Prazo indeterminado, renovado automaticamente a cada dia. Alterações somente por acordo entre as partes.",
 };

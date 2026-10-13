@@ -130,7 +130,7 @@
   @media (max-width: 560px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
   .grafico { margin: 0 0 28px; }
   .grafico h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
-  .barra { display: grid; grid-template-columns: 110px 1fr 28px; align-items: center; gap: 10px; padding: 3px 0; font-size: 16px; }
+  .barra { display: grid; grid-template-columns: 120px 1fr 28px; align-items: center; gap: 10px; padding: 3px 0; font-size: 16px; }
   .barra .trilho { height: 14px; }
   .barra .valor { height: 100%; background: var(--vinho); border-radius: 0 4px 4px 0; }
   .barra .num { font-variant-numeric: tabular-nums; text-align: right; color: var(--suave); }
@@ -179,6 +179,7 @@
       <li><a href="#c5">Da vigência</a></li>
       <li><a href="#a1">Anexo I: Indicadores</a></li>
       <li><a href="#a2">Anexo II: Registro gastronômico</a></li>
+      <li><a href="#a3">Anexo III: Registro audiovisual</a></li>
     </ol>
   </nav>
 
@@ -229,6 +230,25 @@
     <table>
       <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th><th>Pedido</th></tr></thead>
       <tbody id="lugares"></tbody>
+    </table>
+  </section>
+
+  <section class="anexo">
+    <h2 id="a3">Anexo III <small>Registro audiovisual</small></h2>
+    <p>Obras assistidas pelas partes em conjunto:</p>
+    <div class="kpis" id="kpis-av"></div>
+    <div class="grafico"><h3>Filmes por gênero</h3><div id="filmes-genero"></div></div>
+    <div class="grafico"><h3>Filmes por país de origem</h3><div id="filmes-pais"></div></div>
+    <p class="nota" style="font-size:15px" id="constatacao"></p>
+    <h3 style="font-size:17px;margin:28px 0 0">Filmes</h3>
+    <table>
+      <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>País</th></tr></thead>
+      <tbody id="filmes"></tbody>
+    </table>
+    <h3 style="font-size:17px;margin:28px 0 0">Séries</h3>
+    <table>
+      <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>Situação</th></tr></thead>
+      <tbody id="series"></tbody>
     </table>
   </section>
 
@@ -348,10 +368,10 @@
     }
     return grupos;
   };
-  const barras = (alvo, linhas) => {
+  const barras = (alvo, linhas, unidade = (v) => (v === 1 ? "dia" : "dias")) => {
     const max = Math.max(...linhas.map(([, v]) => v), 1);
     for (const [rotulo, v] of linhas) {
-      const dica = `${rotulo}: ${v} ${v === 1 ? "dia" : "dias"}`;
+      const dica = `${rotulo}: ${v} ${unidade(v)}`;
       $(alvo).append(el("div", { class: "barra", title: dica, role: "img", "aria-label": dica },
         el("span", {}, rotulo),
         el("div", { class: "trilho" }, el("div", { class: "valor", style: `width:${(v / max) * 100}%` })),
@@ -386,6 +406,32 @@
       el("td", {}, `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}`),
       el("td", {}, l.nome), el("td", {}, l.tipo || ""), el("td", {}, l.pedido || "")));
   }
+
+  // Anexo III: registro audiovisual
+  const filmes = D.filmes || [], series = D.series || [];
+  const contar = (lista, campo) => {
+    const c = new Map();
+    for (const x of lista) c.set(x[campo], (c.get(x[campo]) || 0) + 1);
+    return [...c].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  };
+  const barrasFilmes = (alvo, linhas) => barras(alvo, linhas, (v) => (v === 1 ? "filme" : "filmes"));
+  const generos = contar(filmes, "genero");
+  barrasFilmes("filmes-genero", generos);
+  barrasFilmes("filmes-pais", contar(filmes, "pais"));
+  const emAndamento = series.filter((x) => x.status === "Em andamento").length;
+  for (const [num, rot] of [
+    [filmes.length, "filmes vistos juntos"],
+    [series.length, "séries"],
+    [emAndamento, "série em andamento"],
+    [generos[0] ? generos[0][1] : 0, generos[0] ? `de ${generos[0][0].toLowerCase()}` : ""],
+  ]) $("kpis-av").append(el("div", { class: "contador" }, el("b", {}, String(num)), el("span", {}, rot)));
+  if (generos[0]) $("constatacao").textContent =
+    `Fica registrado que ${generos[0][1]} dos ${filmes.length} filmes são de ${generos[0][0].toLowerCase()}. A escolha do próximo segue a mesma tendência, salvo veto.`;
+  for (const f of [...filmes].sort((a, b) => b.ano - a.ano || a.titulo.localeCompare(b.titulo)))
+    $("filmes").append(el("tr", {}, el("td", {}, String(f.ano)), el("td", {}, f.titulo),
+      el("td", {}, f.sub ? `${f.genero} · ${f.sub}` : f.genero), el("td", {}, f.pais)));
+  for (const x of series)
+    $("series").append(el("tr", {}, el("td", {}, String(x.ano)), el("td", {}, x.titulo), el("td", {}, x.genero), el("td", {}, x.status)));
 
   // cláusulas
   for (const r of D.requisitos) $("requisitos").append(el("li", {}, r.texto + " — ", el("span", { class: "ok" }, "atende."), r.nota ? el("span", { class: "nota" }, " " + r.nota) : ""));
