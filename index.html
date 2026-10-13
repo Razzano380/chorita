@@ -118,6 +118,28 @@
   button.assinar:hover { background: var(--vinho); color: var(--folha); }
   button.assinar[hidden] { display: none; }
 
+  .sumario { border: 1px solid var(--linha); padding: 14px 18px; margin: 0 0 8px; font-size: 16px; }
+  .sumario b { display: block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin-bottom: 4px; }
+  .sumario ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; }
+  @media (max-width: 480px) { .sumario ol { columns: 1; } }
+  .sumario a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--linha); }
+  .sumario a:hover { color: var(--vinho); border-color: var(--vinho); }
+
+  .anexo { margin-top: 56px; padding-top: 8px; border-top: 1px solid var(--linha); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 28px; }
+  @media (max-width: 560px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .grafico { margin: 0 0 28px; }
+  .grafico h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
+  .barra { display: grid; grid-template-columns: 110px 1fr 28px; align-items: center; gap: 10px; padding: 3px 0; font-size: 16px; }
+  .barra .trilho { height: 14px; }
+  .barra .valor { height: 100%; background: var(--vinho); border-radius: 0 4px 4px 0; }
+  .barra .num { font-variant-numeric: tabular-nums; text-align: right; color: var(--suave); }
+  .barra:hover .valor { opacity: .8; }
+  table { width: 100%; border-collapse: collapse; font-size: 16px; margin-top: 12px; }
+  th { text-align: left; font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); border-bottom: 1px solid var(--tinta); padding: 6px 8px 6px 0; }
+  td { border-bottom: 1px solid var(--linha); padding: 8px 8px 8px 0; vertical-align: top; }
+  td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
   footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--linha); text-align: center; font-size: 14px; color: var(--suave); }
 
   /* visualizador */
@@ -147,37 +169,68 @@
 
   <section class="partes" id="partes"></section>
 
+  <nav class="sumario" aria-label="Sumário">
+    <b>Sumário</b>
+    <ol>
+      <li><a href="#c1">Do histórico</a></li>
+      <li><a href="#c2">Dos requisitos da vaga</a></li>
+      <li><a href="#c3">Dos benefícios</a></li>
+      <li><a href="#c4">Do dia a dia</a></li>
+      <li><a href="#c5">Da vigência</a></li>
+      <li><a href="#a1">Anexo I: Indicadores</a></li>
+      <li><a href="#a2">Anexo II: Registro gastronômico</a></li>
+    </ol>
+  </nav>
+
   <div class="contadores" id="contadores"></div>
 
-  <h2>Cláusula primeira <small>Do histórico</small></h2>
+  <h2 id="c1">Cláusula primeira <small>Do histórico</small></h2>
   <p>As partes declaram, para os devidos fins, o seguinte histórico:</p>
   <ol class="timeline" id="timeline"></ol>
 
   <section id="secao-album">
-    <h2>Anexo I <small>Acervo fotográfico (datas a confirmar)</small></h2>
+    <h2>Acervo <small>Fotos com data a confirmar</small></h2>
     <p class="aviso">Estas fotos chegaram sem a data original nos metadados. Rode o <code>extrair_metadados.py</code> nos arquivos originais, ou escreva a data à mão no <code>midia.js</code>, e elas sobem para a linha do tempo.</p>
     <div class="album" id="album"></div>
   </section>
 
-  <h2>Cláusula segunda <small>Dos requisitos da vaga</small></h2>
+  <h2 id="c2">Cláusula segunda <small>Dos requisitos da vaga</small></h2>
   <p>Requisitos da vaga, verificados um a um:</p>
   <ol class="clausulas" id="requisitos"></ol>
 
-  <h2>Cláusula terceira <small>Dos benefícios</small></h2>
+  <h2 id="c3">Cláusula terceira <small>Dos benefícios</small></h2>
   <p>Ficam assegurados à contratada:</p>
   <ol class="clausulas" id="beneficios"></ol>
 
-  <h2>Cláusula quarta <small>Do dia a dia</small></h2>
+  <h2 id="c4">Cláusula quarta <small>Do dia a dia</small></h2>
   <p>As partes se comprometem mutuamente a:</p>
   <ol class="clausulas" id="dia-a-dia"></ol>
 
-  <h2>Cláusula quinta <small>Da vigência</small></h2>
+  <h2 id="c5">Cláusula quinta <small>Da vigência</small></h2>
   <p id="vigencia"></p>
 
   <p style="margin-top:32px">E, por estarem de pleno acordo, assinam o presente instrumento.</p>
   <p class="nota" id="local-data"></p>
 
   <div class="assinaturas" id="assinaturas"></div>
+
+  <section class="anexo">
+    <h2 id="a1">Anexo I <small>Indicadores</small></h2>
+    <p>Apuração feita a partir dos registros da Cláusula primeira.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="grafico"><h3>Dias registrados por categoria</h3><div id="por-categoria"></div></div>
+    <div class="grafico"><h3>Dias registrados por mês</h3><div id="por-mes"></div></div>
+    <p class="nota" style="font-size:15px">Cada dia conta uma vez por categoria. Datas marcantes entram no total por mês.</p>
+  </section>
+
+  <section class="anexo">
+    <h2 id="a2">Anexo II <small>Registro gastronômico</small></h2>
+    <p>Estabelecimentos visitados pelas partes durante a vigência do contrato:</p>
+    <table>
+      <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th><th>Pedido</th></tr></thead>
+      <tbody id="lugares"></tbody>
+    </table>
+  </section>
 
   <footer>Documento sem validade jurídica.</footer>
 </main>
@@ -268,7 +321,7 @@
 
   for (const ev of eventos) {
     const dt = paraData(ev.data);
-    const titulo = ev.titulo || (ev.midias.length === 1 ? ev.midias[0].legenda : "Registro");
+    const titulo = ev.titulo || ev.midias[0].legenda || "Registro";
     const li = el("li", { class: "evento" + (ev.marco ? " marco" : "") },
       el("div", { class: "data" }, extenso(dt)),
       el("h3", {}, titulo));
@@ -283,6 +336,56 @@
 
   if (semData.length) semData.forEach((m) => $("album").append(miniatura(m)));
   else $("secao-album").remove();
+
+  // Anexo I: indicadores
+  const datados = M.filter((m) => m.data);
+  const diasPor = (chave) => {
+    const grupos = new Map();
+    for (const m of datados) {
+      const k = chave(m); if (!k) continue;
+      if (!grupos.has(k)) grupos.set(k, new Set());
+      grupos.get(k).add(m.data.slice(0, 10));
+    }
+    return grupos;
+  };
+  const barras = (alvo, linhas) => {
+    const max = Math.max(...linhas.map(([, v]) => v), 1);
+    for (const [rotulo, v] of linhas) {
+      const dica = `${rotulo}: ${v} ${v === 1 ? "dia" : "dias"}`;
+      $(alvo).append(el("div", { class: "barra", title: dica, role: "img", "aria-label": dica },
+        el("span", {}, rotulo),
+        el("div", { class: "trilho" }, el("div", { class: "valor", style: `width:${(v / max) * 100}%` })),
+        el("span", { class: "num" }, String(v))));
+    }
+  };
+  const porCategoria = [...diasPor((m) => m.categoria)].map(([k, s]) => [k, s.size]).sort((a, b) => b[1] - a[1]);
+  barras("por-categoria", porCategoria);
+
+  const todosOsDias = new Set([...datados.map((m) => m.data.slice(0, 10)), ...D.marcos.map((m) => m.data)]);
+  const porMes = new Map();
+  const inicio = paraData(D.marcos[0].data);
+  for (let d = new Date(inicio.getFullYear(), inicio.getMonth(), 1); d <= hoje; d.setMonth(d.getMonth() + 1)) {
+    porMes.set(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`, 0);
+  }
+  for (const dia of todosOsDias) { const k = dia.slice(0, 7); if (porMes.has(k)) porMes.set(k, porMes.get(k) + 1); }
+  const nomeMes = (k) => { const n = MESES[Number(k.slice(5)) - 1]; return n[0].toUpperCase() + n.slice(1); };
+  barras("por-mes", [...porMes].map(([k, v]) => [nomeMes(k), v]));
+
+  const lugares = D.lugares || [];
+  for (const [num, rot] of [
+    [diasDesde(D.marcos[0].data), "dias de contrato"],
+    [todosOsDias.size, "dias registrados"],
+    [M.length, "fotos e vídeos"],
+    [lugares.length, "lugares visitados"],
+  ]) $("kpis").append(el("div", { class: "contador" }, el("b", {}, String(num)), el("span", {}, rot)));
+
+  // Anexo II: registro gastronômico
+  for (const l of [...lugares].sort((a, b) => a.data.localeCompare(b.data))) {
+    const dt = paraData(l.data);
+    $("lugares").append(el("tr", {},
+      el("td", {}, `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}`),
+      el("td", {}, l.nome), el("td", {}, l.tipo || ""), el("td", {}, l.pedido || "")));
+  }
 
   // cláusulas
   for (const r of D.requisitos) $("requisitos").append(el("li", {}, r.texto + " — ", el("span", { class: "ok" }, "atende."), r.nota ? el("span", { class: "nota" }, " " + r.nota) : ""));

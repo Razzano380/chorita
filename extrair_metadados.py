@@ -7,7 +7,7 @@ Uso:
 Fotos: lê o EXIF (DateTimeOriginal). HEIC precisa de `pip install pillow-heif`
 e é convertido para JPG, porque Chrome e Firefox não abrem HEIC.
 Vídeos: lê creation_time com ffprobe (precisa do ffmpeg instalado).
-Legendas e datas que você já escreveu no midia.js são mantidas.
+Legendas, categorias e datas que você já escreveu no midia.js são mantidas.
 """
 import json
 import shutil
@@ -112,6 +112,8 @@ def main():
                 capas.add(item["capa"])
         anterior = existente.get(item["arquivo"], {})
         item["legenda"] = anterior.get("legenda") or ""
+        if anterior.get("categoria"):
+            item["categoria"] = anterior["categoria"]
         if not item["data"] and anterior.get("data"):
             item["data"] = anterior["data"]  # data escrita à mão
         itens.append(item)

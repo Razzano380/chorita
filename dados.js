@@ -37,5 +37,11 @@ window.DADOS = {
     "Avisar quando chegar em casa.",
   ],
 
+  // Anexo II. "tipo" vira a categoria da tabela.
+  lugares: [
+    { data: "2026-09-02", nome: "Holy Burger", tipo: "Hambúrguer", pedido: "Hambúrguer e drinks no balcão" },
+    { data: "2026-09-19", nome: "Restaurante a confirmar", tipo: "Comida brasileira", pedido: "Feijoada e suco" },
+  ],
+
   vigencia: "Prazo indeterminado, renovado automaticamente a cada dia. Alterações somente por acordo entre as partes.",
 };
