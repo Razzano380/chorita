@@ -4,290 +4,414 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0b0c">
 <title>Contrato da Chorita</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Tema único: preto e o vermelho do cabelo dela. Contraste conferido sobre o preto (texto ≥ 4.5:1, marcas ≥ 3:1). */
   :root {
-    --papel: #f7f2ea;
-    --folha: #fffdf8;
-    --tinta: #2b2522;
-    --suave: #7a6e66;
-    --linha: #e2d8cb;
-    --vinho: #8c2f39;
-    --sombra: 0 1px 2px rgba(60, 40, 30, .08), 0 8px 24px rgba(60, 40, 30, .06);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --papel: #1c1917; --folha: #24201d; --tinta: #eee6dc; --suave: #a89c92;
-      --linha: #3a332e; --vinho: #e0848f; --sombra: none;
-    }
-  }
-  :root[data-theme="dark"] {
-    --papel: #1c1917; --folha: #24201d; --tinta: #eee6dc; --suave: #a89c92;
-    --linha: #3a332e; --vinho: #e0848f; --sombra: none;
+    color-scheme: dark;
+    --fundo: #0b0b0c;
+    --superficie: #141416;
+    --superficie-2: #1b1b1e;
+    --linha: #2a2a2e;
+    --tinta: #f2eee9;
+    --suave: #a39e98;
+    --vermelho: #e0464f;        /* texto em vermelho */
+    --vermelho-forte: #c42a38;  /* barras, pontos, preenchimentos */
+    --vermelho-fundo: rgba(196, 42, 56, .12);
+    /* fatias da rosca, validadas para daltonismo sobre a superfície */
+    --serie-1: #d0404c; --serie-2: #b38d24; --serie-3: #3f8ad9;
+    --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --raio: 10px;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body {
-    margin: 0; background: var(--papel); color: var(--tinta);
-    font: 19px/1.6 "EB Garamond", Georgia, "Times New Roman", serif;
+    margin: 0; background: var(--fundo); color: var(--tinta);
+    font: 18px/1.65 var(--serif); -webkit-font-smoothing: antialiased;
   }
-  .folha {
-    max-width: 760px; margin: 40px auto; padding: 56px 64px;
-    background: var(--folha); box-shadow: var(--sombra); border: 1px solid var(--linha);
-  }
-  @media (max-width: 640px) { .folha { margin: 0; padding: 32px 16px; border: 0; } body { font-size: 18px; } }
-
-  header { text-align: center; border-bottom: 1px solid var(--linha); padding-bottom: 28px; margin-bottom: 32px; }
-  .selo { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--vinho); }
-  h1 { font-weight: 600; font-size: 34px; line-height: 1.2; margin: 10px 0 6px; }
-  .sub { color: var(--suave); font-style: italic; margin: 0; }
-
-  h2 {
-    font-size: 15px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
-    color: var(--vinho); margin: 48px 0 14px;
-  }
-  h2 small { display: block; font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--tinta); font-weight: 600; margin-top: 2px; }
+  a { color: inherit; }
   p { margin: 0 0 14px; }
-  .partes p { text-indent: 0; }
   strong { font-weight: 600; }
+  ::selection { background: var(--vermelho-forte); color: #fff; }
+  :focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; border-radius: 4px; }
 
-  /* contadores */
-  .contadores { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 8px; }
-  .contador { border: 1px solid var(--linha); padding: 14px 10px; text-align: center; }
-  .contador b { display: block; font-size: 32px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .contador span { font-size: 14px; color: var(--suave); }
-  .contador.vivo { grid-column: 1 / -1; }
-  .contador.vivo b { font-size: 28px; }
-  @media (max-width: 480px) { .contadores { grid-template-columns: 1fr; } }
+  /* barra superior */
+  .topo {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(11, 11, 12, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--linha);
+  }
+  .topo-in { max-width: 1040px; margin: 0 auto; padding: 0 16px; height: 56px; display: flex; align-items: center; gap: 24px; }
+  .marca { font: 600 15px var(--sans); letter-spacing: .02em; white-space: nowrap; text-decoration: none; }
+  .marca span { color: var(--vermelho); }
+  .nav { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    font: 500 13px var(--sans); color: var(--suave); text-decoration: none; white-space: nowrap;
+    padding: 6px 10px; border-radius: 999px;
+  }
+  .nav a:hover { color: var(--tinta); }
+  .nav a.ativo { color: var(--tinta); background: var(--vermelho-fundo); box-shadow: inset 0 0 0 1px rgba(224, 70, 79, .35); }
+  .progresso { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--vermelho-forte); }
+  @media (max-width: 720px) { .marca { display: none; } .nav { margin-left: 0; } }
+
+  /* capa */
+  .capa {
+    border-bottom: 1px solid var(--linha);
+    background: radial-gradient(900px 420px at 50% -10%, rgba(196, 42, 56, .22), transparent 70%), var(--fundo);
+  }
+  .capa-in { max-width: 1040px; margin: 0 auto; padding: 88px 16px 64px; text-align: center; }
+  .selo { font: 600 12px var(--sans); letter-spacing: .24em; text-transform: uppercase; color: var(--vermelho); }
+  h1 { font-weight: 500; font-size: clamp(44px, 8vw, 84px); line-height: 1; margin: 18px 0 14px; letter-spacing: -.01em; }
+  .sub { font-style: italic; color: var(--suave); font-size: 22px; margin: 0; }
+  .relogio { display: inline-grid; grid-template-columns: repeat(4, auto); gap: 0 28px; margin: 48px 0 10px; }
+  .relogio b { font: 600 clamp(34px, 6vw, 56px)/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .relogio span { font: 500 11px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--suave); margin-top: 8px; }
+  .relogio div { display: flex; flex-direction: column; align-items: center; }
+  .relogio-legenda { font: 400 14px var(--sans); color: var(--suave); margin: 0; }
+  .marcos-capa { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+  .pilula {
+    font: 500 13px var(--sans); color: var(--suave); border: 1px solid var(--linha); border-radius: 999px;
+    padding: 8px 14px; background: var(--superficie);
+  }
+  .pilula b { color: var(--tinta); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  /* corpo do contrato: rótulo à esquerda, conteúdo à direita */
+  main { max-width: 1040px; margin: 0 auto; padding: 0 16px 80px; }
+  .secao { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding: 64px 0; border-bottom: 1px solid var(--linha); }
+  .secao > header { position: relative; }
+  .secao > header > div { position: sticky; top: 88px; }
+  .num { font: 600 12px var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--vermelho); }
+  h2 { font-weight: 500; font-size: 30px; line-height: 1.15; margin: 8px 0 0; }
+  .corpo { min-width: 0; max-width: 720px; }
+  .lead { color: var(--suave); }
+  @media (max-width: 820px) {
+    .secao { grid-template-columns: 1fr; gap: 20px; padding: 48px 0; }
+    .secao > header > div { position: static; }
+  }
+
+  /* partes */
+  .partes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+  @media (max-width: 560px) { .partes { grid-template-columns: 1fr; } }
+  .cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); padding: 18px 20px; }
+  .rotulo { font: 600 11px var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--suave); }
+  .parte-nome { font-size: 22px; font-weight: 500; line-height: 1.25; margin: 6px 0 2px; }
+  .parte-vulgo { font-style: italic; color: var(--suave); }
+  .parte-vulgo em { color: var(--vermelho); font-style: italic; }
 
   /* linha do tempo */
-  .timeline { list-style: none; margin: 24px 0 0; padding: 0 0 0 28px; border-left: 1px solid var(--linha); }
-  .evento { position: relative; margin: 0 0 34px; }
+  .timeline { list-style: none; margin: 8px 0 0; padding: 0 0 0 28px; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--vermelho-forte), var(--linha) 30%, var(--linha) 70%, var(--vermelho-forte)); }
+  .evento { position: relative; padding: 0 0 36px; }
   .evento::before {
-    content: ""; position: absolute; left: -33px; top: 9px; width: 9px; height: 9px;
-    border-radius: 50%; background: var(--folha); border: 1px solid var(--vinho);
+    content: ""; position: absolute; left: -28px; top: 7px; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--fundo); border: 1.5px solid var(--suave);
   }
-  .evento.marco::before { background: var(--vinho); }
-  .evento.hoje::before { border-style: dashed; }
-  .data { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--suave); }
-  .evento h3 { margin: 2px 0 4px; font-size: 22px; font-weight: 600; }
-  .evento p { margin: 0; }
-  .midias { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .evento.marco::before { background: var(--vermelho-forte); border-color: var(--vermelho-forte); box-shadow: 0 0 0 4px var(--vermelho-fundo); }
+  .evento.hoje::before { border-color: var(--vermelho); border-style: dashed; }
+  .data { font: 500 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--suave); }
+  .evento h3 { margin: 4px 0 4px; font-size: 24px; font-weight: 500; line-height: 1.25; }
+  .evento.marco h3 { color: var(--tinta); }
+  .evento p { margin: 0; color: var(--suave); }
+  .etiqueta { display: inline-block; font: 600 10px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--vermelho); margin-left: 8px; vertical-align: 2px; }
 
-  figure { margin: 0; }
+  .midias { display: flex; gap: 10px; margin-top: 14px; overflow-x: auto; padding-bottom: 4px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+  figure { margin: 0; flex: none; scroll-snap-align: start; }
   .miniatura {
-    display: block; padding: 0; border: 1px solid var(--linha); background: var(--folha);
-    cursor: zoom-in; width: 140px; position: relative;
+    display: block; padding: 0; border: 0; background: var(--superficie-2); border-radius: 8px; overflow: hidden;
+    cursor: zoom-in; width: 168px; position: relative;
   }
-  .miniatura img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  .miniatura img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform .35s ease, opacity .2s; }
+  .miniatura:hover img { transform: scale(1.04); }
   .miniatura .play {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    color: #fff; font-size: 30px; text-shadow: 0 1px 6px rgba(0,0,0,.5);
+    position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, .25);
   }
-  figcaption { font-size: 14px; color: var(--suave); font-style: italic; padding: 4px 2px 0; max-width: 140px; }
-
-  .album { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 14px; margin-top: 16px; }
-  .album .miniatura, .album figcaption { width: 100%; max-width: none; }
-  .aviso { font-size: 15px; color: var(--suave); border-left: 2px solid var(--vinho); padding-left: 12px; }
-
-  /* listas do contrato */
-  ol.clausulas { padding-left: 0; list-style: none; counter-reset: item; margin: 0; }
-  ol.clausulas > li { counter-increment: item; padding-left: 44px; position: relative; margin-bottom: 12px; }
-  ol.clausulas > li::before {
-    content: counter(item, upper-roman) "."; position: absolute; left: 0; color: var(--vinho); font-weight: 600;
+  .miniatura .play::after {
+    content: ""; width: 44px; height: 44px; border-radius: 50%; background: rgba(11, 11, 12, .7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l8 5-8 5z' fill='%23fff'/%3E%3C/svg%3E") center/22px no-repeat;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25);
   }
-  .ok { color: var(--vinho); font-weight: 600; }
-  .nota { color: var(--suave); font-style: italic; }
+  figcaption { font: 400 12px/1.4 var(--sans); color: var(--suave); padding: 6px 2px 0; width: 168px; }
+  @media (max-width: 560px) { .miniatura, figcaption { width: 140px; } }
+
+  .album { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .album .miniatura, .album figcaption { width: 100%; }
+
+  /* listas */
+  ol.lista { list-style: none; margin: 0; padding: 0; counter-reset: item; }
+  ol.lista > li { counter-increment: item; display: grid; grid-template-columns: 40px 1fr; padding: 14px 0; border-top: 1px solid var(--linha); }
+  ol.lista > li:last-child { border-bottom: 1px solid var(--linha); }
+  ol.lista > li::before { content: counter(item, upper-roman); font: 600 13px/1.9 var(--sans); color: var(--vermelho); }
+
+  ul.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  ul.checklist li { display: grid; grid-template-columns: 28px 1fr; align-items: start; background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); padding: 14px 16px; }
+  ul.checklist li::before {
+    content: ""; width: 18px; height: 18px; margin-top: 5px; border-radius: 50%; background: var(--vermelho-forte) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  }
+  .checklist small { display: block; font: 400 13px/1.5 var(--sans); color: var(--suave); margin-top: 2px; }
+  .status { font: 600 10px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--vermelho); margin-left: 8px; vertical-align: 2px; }
+
+  .grade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 560px) { .grade { grid-template-columns: 1fr; } }
+  .grade .cartao h3 { font-size: 20px; font-weight: 500; margin: 6px 0 6px; }
+  .grade .cartao p { margin: 0; color: var(--suave); font-size: 17px; }
+  .grade .cartao .rotulo { color: var(--vermelho); }
+
+  .vigencia { font-size: 22px; line-height: 1.5; border-left: 2px solid var(--vermelho-forte); padding-left: 20px; margin: 0; }
 
   /* assinaturas */
-  .assinaturas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+  .fecho { margin-top: 36px; }
+  .assinaturas { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
   @media (max-width: 560px) { .assinaturas { grid-template-columns: 1fr; } }
-  .assinatura { text-align: center; }
   .assinatura .linha {
-    min-height: 54px; border-bottom: 1px solid var(--tinta);
-    display: flex; align-items: flex-end; justify-content: center;
-    font-style: italic; font-size: 28px; color: var(--vinho); padding-bottom: 2px;
+    height: 64px; border-bottom: 1px solid var(--suave); display: flex; align-items: flex-end; justify-content: center;
+    font: italic 500 34px/1 var(--serif); color: var(--vermelho); padding-bottom: 6px;
   }
-  .assinatura .quem { margin-top: 6px; font-size: 16px; }
-  .assinatura .quando { font-size: 14px; color: var(--suave); min-height: 20px; }
-  button.assinar {
-    margin-top: 10px; font: inherit; font-size: 16px; padding: 6px 18px; cursor: pointer;
-    background: transparent; color: var(--vinho); border: 1px solid var(--vinho);
+  .assinatura .quem { font: 500 14px var(--sans); text-align: center; margin-top: 8px; }
+  .assinatura .papel { font: 400 12px var(--sans); color: var(--suave); text-align: center; }
+  .assinatura .quando { font: 400 12px var(--sans); color: var(--suave); text-align: center; min-height: 18px; margin-top: 4px; }
+  .botao {
+    display: block; margin: 12px auto 0; font: 500 14px var(--sans); padding: 10px 18px; cursor: pointer;
+    background: var(--vermelho-forte); color: #fff; border: 0; border-radius: 999px;
   }
-  button.assinar:hover { background: var(--vinho); color: var(--folha); }
-  button.assinar[hidden] { display: none; }
+  .botao:hover { background: #d23542; }
+  .botao[hidden] { display: none; }
 
-  /* cores das fatias: validadas para daltonismo, uma escala no claro e outra no escuro */
-  :root { --serie-1: #8c2f39; --serie-2: #b07d2b; --serie-3: #2a6db5; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --serie-1: #d0566a; --serie-2: #b38d24; --serie-3: #3f8ad9; } }
-  :root[data-theme="dark"] { --serie-1: #d0566a; --serie-2: #b38d24; --serie-3: #3f8ad9; }
-  .rosca { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-  .rosca svg { width: 160px; height: 160px; flex: none; }
-  .rosca circle:hover { opacity: .85; }
-  .rosca-total { font: 600 8px "EB Garamond", Georgia, serif; fill: var(--tinta); }
-  .legenda { list-style: none; margin: 0; padding: 0; font-size: 16px; }
-  .legenda li { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
-  .legenda i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
-  .legenda b { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 6px; }
-  .legenda small { color: var(--suave); font-size: 14px; }
+  /* indicadores */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 4px 0 28px; }
+  @media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); padding: 16px; }
+  .kpi b { display: block; font: 600 32px/1.1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .kpi span { font: 400 13px var(--sans); color: var(--suave); }
 
-  .marcantes { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
-  @media (max-width: 640px) { .marcantes { grid-template-columns: 1fr; } }
-  .marcantes h3 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin: 0 0 4px; }
-  .marcante { padding: 14px 0; border-bottom: 1px solid var(--linha); }
-  .marcante h4 { margin: 2px 0 4px; font-size: 20px; font-weight: 600; }
-  .marcante p { margin: 0; }
-  .marcante .midias figure .miniatura, .marcante .midias figcaption { width: 96px; }
-
-  .sumario { border: 1px solid var(--linha); padding: 14px 18px; margin: 0 0 8px; font-size: 16px; }
-  .sumario b { display: block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin-bottom: 4px; }
-  .sumario ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; }
-  @media (max-width: 480px) { .sumario ol { columns: 1; } }
-  .sumario a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--linha); }
-  .sumario a:hover { color: var(--vinho); border-color: var(--vinho); }
-
-  .anexo { margin-top: 56px; padding-top: 8px; border-top: 1px solid var(--linha); }
-  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 28px; }
-  @media (max-width: 560px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
-  .grafico { margin: 0 0 28px; }
-  .grafico h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
-  .barra { display: grid; grid-template-columns: 120px 1fr 28px; align-items: center; gap: 10px; padding: 3px 0; font-size: 16px; }
-  .barra .trilho { height: 14px; }
-  .barra .valor { height: 100%; background: var(--vinho); border-radius: 0 4px 4px 0; }
+  .grafico { background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px; margin: 0 0 16px; }
+  .grafico h3 { font: 600 13px var(--sans); letter-spacing: .04em; margin: 0 0 14px; }
+  .grafico .nota { font: italic 400 15px var(--serif); color: var(--suave); margin: 14px 0 0; }
+  .barra { display: grid; grid-template-columns: 116px 1fr 24px; align-items: center; gap: 12px; padding: 4px 0; font: 400 13px var(--sans); }
+  .barra .trilho { height: 10px; background: var(--superficie-2); border-radius: 0 4px 4px 0; }
+  .barra .valor { height: 100%; background: var(--vermelho-forte); border-radius: 0 4px 4px 0; }
   .barra .num { font-variant-numeric: tabular-nums; text-align: right; color: var(--suave); }
-  .barra:hover .valor { opacity: .8; }
-  table { width: 100%; border-collapse: collapse; font-size: 16px; margin-top: 12px; }
-  th { text-align: left; font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); border-bottom: 1px solid var(--tinta); padding: 6px 8px 6px 0; }
-  td { border-bottom: 1px solid var(--linha); padding: 8px 8px 8px 0; vertical-align: top; }
-  td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .barra:hover .valor { background: var(--vermelho); }
 
-  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--linha); text-align: center; font-size: 14px; color: var(--suave); }
+  .rosca { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .rosca svg { width: 168px; height: 168px; flex: none; }
+  .rosca circle:hover { opacity: .85; }
+  .rosca-total { font: 600 8px var(--sans); fill: var(--tinta); }
+  .rosca-rotulo { font: 500 2.6px var(--sans); fill: var(--suave); letter-spacing: .1px; }
+  .legenda { list-style: none; margin: 0; padding: 0; font: 400 14px var(--sans); }
+  .legenda li { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+  .legenda i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+  .legenda b { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 4px; }
+  .legenda small { color: var(--suave); font-size: 13px; }
+
+  .tabela { overflow-x: auto; border: 1px solid var(--linha); border-radius: var(--raio); margin: 0 0 16px; }
+  table { width: 100%; border-collapse: collapse; font: 400 14px var(--sans); min-width: 420px; }
+  caption { text-align: left; font: 600 13px var(--sans); letter-spacing: .04em; padding: 14px 16px 6px; }
+  th { text-align: left; font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--suave); padding: 10px 16px; border-bottom: 1px solid var(--linha); }
+  td { padding: 11px 16px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: var(--superficie); }
+  td.mudo { color: var(--suave); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* dias mais marcantes */
+  .marcantes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .marcantes { grid-template-columns: 1fr; } }
+  .marcantes .cartao > .rotulo { color: var(--vermelho); }
+  .marcante { padding: 16px 0 0; }
+  .marcante + .marcante { border-top: 1px solid var(--linha); margin-top: 16px; }
+  .marcante h4 { margin: 4px 0 4px; font-size: 22px; font-weight: 500; }
+  .marcante p { margin: 0; color: var(--suave); }
+  .marcante .miniatura, .marcante figcaption { width: 112px; }
+
+  footer { max-width: 1040px; margin: 0 auto; padding: 32px 16px 48px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 400 12px var(--sans); color: var(--suave); }
 
   /* visualizador */
-  dialog {
-    border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh;
+  dialog { border: 0; padding: 0; background: transparent; width: 100vw; height: 100vh; max-width: none; max-height: none; color: var(--tinta); }
+  dialog::backdrop { background: #050506; }
+  .vis { position: fixed; inset: 0; display: grid; grid-template-rows: 56px 1fr auto; }
+  .vis-topo { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: 500 13px var(--sans); color: var(--suave); }
+  .vis-palco { display: grid; place-items: center; min-height: 0; padding: 0 64px; }
+  .vis-palco img, .vis-palco video { max-width: 100%; max-height: calc(100vh - 160px); border-radius: 6px; display: block; }
+  .vis-legenda { text-align: center; padding: 14px 16px 24px; font-style: italic; font-size: 18px; }
+  .vis-legenda small { display: block; font: 500 11px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--suave); font-style: normal; margin-top: 4px; }
+  .vis button { background: none; border: 0; color: var(--tinta); cursor: pointer; }
+  .vis-fechar { font-size: 28px; line-height: 1; padding: 8px; }
+  .vis-seta {
+    position: fixed; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255, 255, 255, .08) !important; font-size: 22px; display: grid; place-items: center;
   }
-  dialog::backdrop { background: rgba(20, 15, 12, .88); }
-  dialog img, dialog video { display: block; max-width: 94vw; max-height: 86vh; }
-  dialog p { color: #eee6dc; text-align: center; font-style: italic; margin: 8px 0 0; }
-  dialog form { position: fixed; top: 12px; right: 16px; }
-  dialog form button { font: 28px/1 Georgia, serif; background: none; border: 0; color: #fff; cursor: pointer; }
+  .vis-seta:hover { background: var(--vermelho-forte) !important; }
+  .vis-ant { left: 12px; } .vis-prox { right: 12px; }
+  @media (max-width: 560px) { .vis-palco { padding: 0 8px; } .vis-seta { top: auto; bottom: 18px; transform: none; } }
 
   @media print {
-    body { background: #fff; }
-    .folha { box-shadow: none; border: 0; margin: 0; }
-    button.assinar { display: none; }
+    :root { color-scheme: light; --fundo: #fff; --superficie: #fff; --superficie-2: #f3f3f3; --linha: #ddd; --tinta: #111; --suave: #555; --vermelho: #9b1c28; --vermelho-forte: #9b1c28; --serie-1: #8c2f39; --serie-2: #b07d2b; --serie-3: #2a6db5; }
+    .topo, .botao, .progresso { display: none !important; }
+    .capa { background: none; }
+    .secao { break-inside: avoid-page; }
   }
 </style>
 </head>
 <body>
-<main class="folha">
-  <header>
-    <div class="selo">Instrumento particular</div>
+
+<div class="topo">
+  <div class="topo-in">
+    <a class="marca" href="#inicio" id="marca"></a>
+    <nav class="nav" id="nav" aria-label="Seções">
+      <a href="#c1">Histórico</a>
+      <a href="#c2">Requisitos</a>
+      <a href="#c3">Benefícios</a>
+      <a href="#c4">Dia a dia</a>
+      <a href="#c5">Vigência</a>
+      <a href="#a1">Indicadores</a>
+      <a href="#a2">Gastronomia</a>
+      <a href="#a3">Filmes e séries</a>
+      <a href="#a4">Dias marcantes</a>
+    </nav>
+  </div>
+  <div class="progresso" id="progresso"></div>
+</div>
+
+<section class="capa" id="inicio">
+  <div class="capa-in">
+    <div class="selo">Instrumento particular · Nº 001</div>
     <h1>Contrato de Namoro</h1>
     <p class="sub" id="subtitulo"></p>
-  </header>
+    <div class="relogio" id="relogio" aria-live="off"></div>
+    <p class="relogio-legenda">desde a primeira mensagem, e contando</p>
+    <div class="marcos-capa" id="marcos-capa"></div>
+  </div>
+</section>
 
-  <section class="partes" id="partes"></section>
-
-  <nav class="sumario" aria-label="Sumário">
-    <b>Sumário</b>
-    <ol>
-      <li><a href="#c1">Do histórico</a></li>
-      <li><a href="#c2">Dos requisitos da vaga</a></li>
-      <li><a href="#c3">Dos benefícios</a></li>
-      <li><a href="#c4">Do dia a dia</a></li>
-      <li><a href="#c5">Da vigência</a></li>
-      <li><a href="#a1">Anexo I: Indicadores</a></li>
-      <li><a href="#a2">Anexo II: Registro gastronômico</a></li>
-      <li><a href="#a3">Anexo III: Registro audiovisual</a></li>
-      <li><a href="#a4">Anexo IV: Dias mais marcantes</a></li>
-    </ol>
-  </nav>
-
-  <div class="contadores" id="contadores"></div>
-
-  <h2 id="c1">Cláusula primeira <small>Do histórico</small></h2>
-  <p>As partes declaram, para os devidos fins, o seguinte histórico:</p>
-  <ol class="timeline" id="timeline"></ol>
-
-  <section id="secao-album">
-    <h2>Acervo <small>Fotos com data a confirmar</small></h2>
-    <p class="aviso">Estas fotos chegaram sem a data original nos metadados. Rode o <code>extrair_metadados.py</code> nos arquivos originais, ou escreva a data à mão no <code>midia.js</code>, e elas sobem para a linha do tempo.</p>
-    <div class="album" id="album"></div>
+<main>
+  <section class="secao">
+    <header><div><div class="num">Preâmbulo</div><h2>Das partes</h2></div></header>
+    <div class="corpo">
+      <div class="partes" id="partes"></div>
+      <p><strong>Objeto:</strong> o namoro entre as partes, nos termos das cláusulas a seguir.</p>
+    </div>
   </section>
 
-  <h2 id="c2">Cláusula segunda <small>Dos requisitos da vaga</small></h2>
-  <p>Requisitos da vaga, verificados um a um:</p>
-  <ol class="clausulas" id="requisitos"></ol>
-
-  <h2 id="c3">Cláusula terceira <small>Dos benefícios</small></h2>
-  <p>Ficam assegurados à contratada:</p>
-  <ol class="clausulas" id="beneficios"></ol>
-
-  <h2 id="c4">Cláusula quarta <small>Do dia a dia</small></h2>
-  <p>As partes se comprometem mutuamente a:</p>
-  <ol class="clausulas" id="dia-a-dia"></ol>
-
-  <h2 id="c5">Cláusula quinta <small>Da vigência</small></h2>
-  <p id="vigencia"></p>
-
-  <p style="margin-top:32px">E, por estarem de pleno acordo, assinam o presente instrumento.</p>
-  <p class="nota" id="local-data"></p>
-
-  <div class="assinaturas" id="assinaturas"></div>
-
-  <section class="anexo">
-    <h2 id="a1">Anexo I <small>Indicadores</small></h2>
-    <p>Resumo do contrato até a presente data:</p>
-    <div class="kpis" id="kpis"></div>
+  <section class="secao">
+    <header><div><div class="num">Cláusula 1ª</div><h2 id="c1">Do histórico</h2></div></header>
+    <div class="corpo">
+      <p class="lead">As partes declaram, para os devidos fins, o seguinte histórico:</p>
+      <ol class="timeline" id="timeline"></ol>
+      <div id="secao-album">
+        <p class="lead">Fotos com data a confirmar:</p>
+        <div class="album" id="album"></div>
+      </div>
+    </div>
   </section>
 
-  <section class="anexo">
-    <h2 id="a2">Anexo II <small>Registro gastronômico</small></h2>
-    <p>Estabelecimentos visitados pelas partes durante a vigência do contrato:</p>
-    <div class="grafico"><h3>Lugares por categoria</h3><div id="lugares-categoria"></div></div>
-    <table>
-      <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th></tr></thead>
-      <tbody id="lugares"></tbody>
-    </table>
+  <section class="secao">
+    <header><div><div class="num">Cláusula 2ª</div><h2 id="c2">Dos requisitos da vaga</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Requisitos verificados um a um. Todos atendidos pela contratada.</p>
+      <ul class="checklist" id="requisitos"></ul>
+    </div>
   </section>
 
-  <section class="anexo">
-    <h2 id="a3">Anexo III <small>Registro audiovisual</small></h2>
-    <p>Obras assistidas pelas partes em conjunto:</p>
-    <div class="kpis" id="kpis-av"></div>
-    <div class="grafico"><h3>Filmes por gênero</h3><div class="rosca" id="filmes-genero"></div></div>
-    <p class="nota" style="font-size:15px;margin-top:-12px" id="constatacao"></p>
-    <div class="grafico"><h3>Séries por gênero</h3><div id="series-genero"></div></div>
-    <h3 style="font-size:17px;margin:28px 0 0">Filmes</h3>
-    <table>
-      <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>País</th></tr></thead>
-      <tbody id="filmes"></tbody>
-    </table>
-    <h3 style="font-size:17px;margin:28px 0 0">Séries</h3>
-    <table>
-      <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>Situação</th></tr></thead>
-      <tbody id="series"></tbody>
-    </table>
+  <section class="secao">
+    <header><div><div class="num">Cláusula 3ª</div><h2 id="c3">Dos benefícios</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Ficam assegurados à contratada:</p>
+      <div class="grade" id="beneficios"></div>
+    </div>
   </section>
 
-  <section class="anexo">
-    <h2 id="a4">Anexo IV <small>Dias mais marcantes</small></h2>
-    <p>Cada parte declara, de próprio punho, o dia mais marcante vivido com a outra:</p>
-    <div class="marcantes" id="marcantes"></div>
+  <section class="secao">
+    <header><div><div class="num">Cláusula 4ª</div><h2 id="c4">Do dia a dia</h2></div></header>
+    <div class="corpo">
+      <p class="lead">As partes se comprometem mutuamente a:</p>
+      <ol class="lista" id="dia-a-dia"></ol>
+    </div>
   </section>
 
-  <footer>Documento sem validade jurídica.</footer>
+  <section class="secao">
+    <header><div><div class="num">Cláusula 5ª</div><h2 id="c5">Da vigência</h2></div></header>
+    <div class="corpo">
+      <p class="vigencia" id="vigencia"></p>
+      <div class="fecho">
+        <p>E, por estarem de pleno acordo, assinam o presente instrumento.</p>
+        <p class="lead" id="local-data"></p>
+        <div class="assinaturas" id="assinaturas"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <header><div><div class="num">Anexo I</div><h2 id="a1">Indicadores</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Resumo do contrato até a presente data.</p>
+      <div class="kpis" id="kpis"></div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <header><div><div class="num">Anexo II</div><h2 id="a2">Registro gastronômico</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Estabelecimentos visitados pelas partes durante a vigência do contrato.</p>
+      <div class="grafico"><h3>Lugares por categoria</h3><div id="lugares-categoria"></div></div>
+      <div class="tabela"><table>
+        <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th></tr></thead>
+        <tbody id="lugares"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <header><div><div class="num">Anexo III</div><h2 id="a3">Registro audiovisual</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Obras assistidas pelas partes em conjunto.</p>
+      <div class="kpis" id="kpis-av"></div>
+      <div class="grafico">
+        <h3>Filmes por gênero</h3>
+        <div class="rosca" id="filmes-genero"></div>
+        <p class="nota" id="constatacao"></p>
+      </div>
+      <div class="grafico"><h3>Séries por gênero</h3><div id="series-genero"></div></div>
+      <div class="tabela"><table>
+        <caption>Filmes</caption>
+        <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>País</th></tr></thead>
+        <tbody id="filmes"></tbody>
+      </table></div>
+      <div class="tabela"><table>
+        <caption>Séries</caption>
+        <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>Situação</th></tr></thead>
+        <tbody id="series"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <header><div><div class="num">Anexo IV</div><h2 id="a4">Dias mais marcantes</h2></div></header>
+    <div class="corpo">
+      <p class="lead">Cada parte declara, de próprio punho, os dias mais marcantes vividos com a outra.</p>
+      <div class="marcantes" id="marcantes"></div>
+    </div>
+  </section>
 </main>
 
-<dialog id="visualizador">
-  <form method="dialog"><button aria-label="Fechar">×</button></form>
-  <div id="visualizador-conteudo"></div>
-  <p id="visualizador-legenda"></p>
+<footer>
+  <span id="rodape"></span>
+  <span>Documento sem validade jurídica.</span>
+</footer>
+
+<dialog id="visualizador" aria-label="Foto ampliada">
+  <div class="vis">
+    <div class="vis-topo"><span id="vis-contador"></span><button class="vis-fechar" id="vis-fechar" aria-label="Fechar">×</button></div>
+    <div class="vis-palco" id="vis-palco"></div>
+    <div class="vis-legenda" id="vis-legenda"></div>
+    <button class="vis-seta vis-ant" id="vis-ant" aria-label="Anterior">‹</button>
+    <button class="vis-seta vis-prox" id="vis-prox" aria-label="Próxima">›</button>
+  </div>
 </dialog>
 
 <script src="dados.js"></script>
@@ -307,6 +431,7 @@
     return new Date(a, m - 1, dia, hh, mm);
   };
   const extenso = (dt) => `${dt.getDate()} de ${MESES[dt.getMonth()]} de ${dt.getFullYear()}`;
+  const curta = (dt) => `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}`;
   const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
   const diasDesde = (s) => Math.round((hoje - paraData(s.slice(0, 10))) / 86400000);
   const el = (tag, attrs = {}, ...filhos) => {
@@ -315,50 +440,70 @@
     for (const f of filhos) n.append(f);
     return n;
   };
+  const plural = (um, varios) => (v) => (v === 1 ? um : varios);
 
-  // cabeçalho e partes
+  // capa
+  $("marca").append(`${eu.apelido} `, el("span", {}, "&"), ` ${ela.apelido}`);
   $("subtitulo").textContent = `entre ${eu.apelido} e ${ela.apelido}`;
-  $("partes").innerHTML = "";
-  $("partes").append(
-    el("p", {}, el("strong", {}, "CONTRATANTE: "), `${eu.nome}, vulgo “${eu.apelido}”.`),
-    el("p", {}, el("strong", {}, "CONTRATADA: "), `${ela.nome}, vulgo “${ela.apelido}”.`),
-    el("p", {}, el("strong", {}, "OBJETO: "), "o namoro entre as partes."),
-  );
-
-  // contadores (usa os três primeiros marcos)
-  const vivo = el("b", {});
-  $("contadores").append(el("div", { class: "contador vivo" }, vivo, el("span", {}, "desde a primeira mensagem, e contando")));
+  const unidades = ["dias", "horas", "min", "seg"].map((u) => {
+    const b = el("b", {}, "0");
+    $("relogio").append(el("div", {}, b, el("span", {}, u)));
+    return b;
+  });
   const desde = paraData(D.marcos[0].data);
   const tique = () => {
     const t = Math.max(0, Math.floor((Date.now() - desde) / 1000));
-    const dd = Math.floor(t / 86400), hh = Math.floor(t / 3600) % 24, mm = Math.floor(t / 60) % 60, ss = t % 60;
     const z = (n) => String(n).padStart(2, "0");
-    vivo.textContent = `${dd} dias, ${z(hh)} h ${z(mm)} min ${z(ss)} s`;
+    [Math.floor(t / 86400), z(Math.floor(t / 3600) % 24), z(Math.floor(t / 60) % 60), z(t % 60)]
+      .forEach((v, i) => { unidades[i].textContent = v; });
   };
   tique(); setInterval(tique, 1000);
   const rotulos = ["dias desde o primeiro date", "dias desde o primeiro “eu te amo”"];
-  D.marcos.slice(1, 3).forEach((m, i) => {
-    $("contadores").append(el("div", { class: "contador" }, el("b", {}, String(diasDesde(m.data))), el("span", {}, rotulos[i] || m.titulo)));
-  });
+  D.marcos.slice(1, 3).forEach((m, i) =>
+    $("marcos-capa").append(el("div", { class: "pilula" }, el("b", {}, String(diasDesde(m.data))), ` ${rotulos[i] || m.titulo}`)));
 
-  // visualizador
+  // partes
+  for (const [papel, p] of [["Contratante", eu], ["Contratada", ela]])
+    $("partes").append(el("div", { class: "cartao" },
+      el("div", { class: "rotulo" }, papel),
+      el("div", { class: "parte-nome" }, p.nome),
+      el("div", { class: "parte-vulgo" }, "vulgo ", el("em", {}, p.apelido))));
+
+  // visualizador: navega por todas as mídias em ordem
+  const galeria = [...M].sort((a, b) => (a.data || "9").localeCompare(b.data || "9"));
   const dlg = $("visualizador");
-  const abrir = (m) => {
-    const alvo = $("visualizador-conteudo");
-    alvo.innerHTML = "";
-    alvo.append(m.tipo === "video"
+  let atual = 0;
+  const mostrar = (i) => {
+    atual = (i + galeria.length) % galeria.length;
+    const m = galeria[atual];
+    $("vis-palco").replaceChildren(m.tipo === "video"
       ? el("video", { src: m.arquivo, controls: "", autoplay: "", playsinline: "" })
       : el("img", { src: m.arquivo, alt: m.legenda || "" }));
-    $("visualizador-legenda").textContent = m.legenda || "";
-    dlg.showModal();
+    $("vis-legenda").replaceChildren(m.legenda || "", el("small", {}, m.data ? extenso(paraData(m.data)) : ""));
+    $("vis-contador").textContent = `${atual + 1} / ${galeria.length}`;
   };
-  dlg.addEventListener("close", () => { $("visualizador-conteudo").innerHTML = ""; });
-  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+  const abrir = (m) => { mostrar(galeria.indexOf(m)); dlg.showModal(); };
+  $("vis-ant").onclick = () => mostrar(atual - 1);
+  $("vis-prox").onclick = () => mostrar(atual + 1);
+  $("vis-fechar").onclick = () => dlg.close();
+  dlg.addEventListener("close", () => $("vis-palco").replaceChildren());
+  dlg.addEventListener("click", (e) => { if (e.target.id === "vis-palco") dlg.close(); });
+  dlg.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") mostrar(atual - 1);
+    if (e.key === "ArrowRight") mostrar(atual + 1);
+  });
+  let toqueX = null;
+  dlg.addEventListener("touchstart", (e) => { toqueX = e.touches[0].clientX; }, { passive: true });
+  dlg.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - toqueX;
+    if (toqueX !== null && Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
+    toqueX = null;
+  });
 
   const miniatura = (m) => {
-    const b = el("button", { class: "miniatura", type: "button", "aria-label": m.legenda || "Abrir" },
+    const b = el("button", { class: "miniatura", type: "button", "aria-label": `Ampliar: ${m.legenda || "foto"}` },
       el("img", { src: m.capa || m.arquivo, alt: m.legenda || "", loading: "lazy" }));
-    if (m.tipo === "video") b.append(el("span", { class: "play" }, "▶"));
+    if (m.tipo === "video") b.append(el("span", { class: "play" }));
     b.addEventListener("click", () => abrir(m));
     return el("figure", {}, b, el("figcaption", {}, m.legenda || ""));
   };
@@ -377,12 +522,10 @@
     porDia.get(dia).midias.push(m);
   }
   eventos.sort((a, b) => a.data.localeCompare(b.data));
-
   for (const ev of eventos) {
-    const dt = paraData(ev.data);
     const titulo = ev.titulo || ev.midias[0].legenda || "Registro";
     const li = el("li", { class: "evento" + (ev.marco ? " marco" : "") },
-      el("div", { class: "data" }, extenso(dt)),
+      el("div", { class: "data" }, extenso(paraData(ev.data))),
       el("h3", {}, titulo));
     if (ev.texto) li.append(el("p", {}, ev.texto));
     if (ev.midias.length) li.append(el("div", { class: "midias" }, ...ev.midias.map(miniatura)));
@@ -390,44 +533,41 @@
   }
   $("timeline").append(el("li", { class: "evento hoje" },
     el("div", { class: "data" }, extenso(hoje)),
-    el("h3", {}, "Hoje"),
-    el("p", {}, "Contrato em vigor.")));
-
+    el("h3", {}, "Hoje", el("span", { class: "etiqueta" }, "Em vigor")),
+    el("p", {}, "A história continua.")));
   if (semData.length) semData.forEach((m) => $("album").append(miniatura(m)));
   else $("secao-album").remove();
 
-  // Anexo I: indicadores
-  // Rosca: até 3 fatias com cores validadas (claro e escuro); acima disso, agrupa em "Outros".
-  const rosca = (alvo, linhas, unidade) => {
+  // gráficos
+  // Rosca: até 3 fatias com cores validadas; acima disso, agrupa em "Outros".
+  const rosca = (alvo, linhas, unidade, rotuloCentro) => {
     if (linhas.length > 3) linhas = [...linhas.slice(0, 2), ["Outros", linhas.slice(2).reduce((t, [, v]) => t + v, 0)]];
     const total = linhas.reduce((t, [, v]) => t + v, 0) || 1;
-    const NS = "http://www.w3.org/2000/svg", r = 15.915, svg = document.createElementNS(NS, "svg");
+    const NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg");
+    const svgEl = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); return n; };
     svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("role", "img");
     svg.setAttribute("aria-label", linhas.map(([k, v]) => `${k}: ${v}`).join(", "));
     const legenda = el("ul", { class: "legenda" });
     let acumulado = 0;
     linhas.forEach(([rotulo, v], i) => {
       const fatia = (v / total) * 100;
-      const c = document.createElementNS(NS, "circle");
-      for (const [k, val] of Object.entries({ cx: 21, cy: 21, r, fill: "none", "stroke-width": 7,
-        stroke: `var(--serie-${i + 1})`, "stroke-dasharray": `${fatia} ${100 - fatia}`, "stroke-dashoffset": 25 - acumulado }))
-        c.setAttribute(k, val);
+      const c = svgEl("circle", { cx: 21, cy: 21, r: 15.915, fill: "none", "stroke-width": 6,
+        stroke: `var(--serie-${i + 1})`, "stroke-dasharray": `${fatia} ${100 - fatia}`, "stroke-dashoffset": 25 - acumulado });
       const t = document.createElementNS(NS, "title"); t.textContent = `${rotulo}: ${v} ${unidade(v)}`; c.append(t);
       svg.append(c);
-      // separador de 2px entre fatias, na cor do papel
-      const sep = document.createElementNS(NS, "line");
-      const ang = ((acumulado / 100) * 360 - 90) * Math.PI / 180;
-      for (const [k, val] of Object.entries({ x1: 21 + 11.4 * Math.cos(ang), y1: 21 + 11.4 * Math.sin(ang),
-        x2: 21 + 20.4 * Math.cos(ang), y2: 21 + 20.4 * Math.sin(ang), stroke: "var(--folha)", "stroke-width": .6 }))
-        sep.setAttribute(k, val);
-      if (linhas.length > 1) svg.append(sep);
+      if (linhas.length > 1) { // separador entre fatias, na cor da superfície
+        const ang = ((acumulado / 100) * 360 - 90) * Math.PI / 180;
+        svg.append(svgEl("line", { x1: 21 + 12.4 * Math.cos(ang), y1: 21 + 12.4 * Math.sin(ang),
+          x2: 21 + 19.4 * Math.cos(ang), y2: 21 + 19.4 * Math.sin(ang), stroke: "var(--superficie)", "stroke-width": .7 }));
+      }
       acumulado += fatia;
       legenda.append(el("li", {}, el("i", { style: `background:var(--serie-${i + 1})` }),
-        el("span", {}, rotulo), el("b", {}, `${v}`), el("small", {}, ` ${Math.round((v / total) * 100)}%`)));
+        el("span", {}, rotulo), el("b", {}, `${v}`), el("small", {}, `${Math.round((v / total) * 100)}%`)));
     });
-    const centro = document.createElementNS(NS, "text");
-    for (const [k, val] of Object.entries({ x: 21, y: 22.6, "text-anchor": "middle", class: "rosca-total" })) centro.setAttribute(k, val);
+    const centro = svgEl("text", { x: 21, y: 22.4, "text-anchor": "middle", class: "rosca-total" });
     centro.textContent = String(total); svg.append(centro);
+    const sub = svgEl("text", { x: 21, y: 26.6, "text-anchor": "middle", class: "rosca-rotulo" });
+    sub.textContent = rotuloCentro; svg.append(sub);
     $(alvo).append(svg, legenda);
   };
   const barras = (alvo, linhas, unidade) => {
@@ -440,88 +580,106 @@
         el("span", { class: "num" }, String(v))));
     }
   };
-  const lugares = D.lugares || [];
-  for (const [num, rot] of [
-    [diasDesde(D.marcos[0].data), "dias de contrato"],
-    [M.length, "fotos e vídeos"],
-    [lugares.length, "lugares visitados"],
-    [(D.filmes || []).length, "filmes vistos juntos"],
-  ]) $("kpis").append(el("div", { class: "contador" }, el("b", {}, String(num)), el("span", {}, rot)));
-
-  // Anexo II: registro gastronômico
-  // com data primeiro (em ordem), depois os sem data em ordem alfabética
-  const ordemLugar = (a, b) => (a.data ? 0 : 1) - (b.data ? 0 : 1) || (a.data || "").localeCompare(b.data || "") || a.nome.localeCompare(b.nome);
-  for (const l of [...lugares].sort(ordemLugar)) {
-    const dt = l.data && paraData(l.data);
-    $("lugares").append(el("tr", {},
-      el("td", {}, dt ? `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}` : "—"),
-      el("td", {}, l.nome), el("td", {}, l.tipo || "")));
-  }
-
-  // Anexo III: registro audiovisual
-  const filmes = D.filmes || [], series = D.series || [];
   const contar = (lista, campo) => {
     const c = new Map();
     for (const x of lista) c.set(x[campo], (c.get(x[campo]) || 0) + 1);
     return [...c].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   };
-  barras("lugares-categoria", contar(lugares, "tipo"), (v) => (v === 1 ? "lugar" : "lugares"));
+  const kpis = (alvo, itens) => { for (const [num, rot] of itens) $(alvo).append(el("div", { class: "kpi" }, el("b", {}, String(num)), el("span", {}, rot))); };
+
+  // Anexo I
+  const lugares = D.lugares || [], filmes = D.filmes || [], series = D.series || [];
+  kpis("kpis", [
+    [diasDesde(D.marcos[0].data), "dias de contrato"],
+    [M.length, "fotos e vídeos"],
+    [lugares.length, "lugares visitados"],
+    [filmes.length, "filmes vistos juntos"],
+  ]);
+
+  // Anexo II: com data primeiro (em ordem), depois os sem data em ordem alfabética
+  barras("lugares-categoria", contar(lugares, "tipo"), plural("lugar", "lugares"));
+  const ordemLugar = (a, b) => (a.data ? 0 : 1) - (b.data ? 0 : 1) || (a.data || "").localeCompare(b.data || "") || a.nome.localeCompare(b.nome);
+  for (const l of [...lugares].sort(ordemLugar))
+    $("lugares").append(el("tr", {}, el("td", { class: "mudo" }, l.data ? curta(paraData(l.data)) : "—"), el("td", {}, l.nome), el("td", {}, l.tipo || "")));
+
+  // Anexo III
   const generos = contar(filmes, "genero");
-  rosca("filmes-genero", generos, (v) => (v === 1 ? "filme" : "filmes"));
-  barras("series-genero", contar(series, "genero"), (v) => (v === 1 ? "série" : "séries"));
   const emAndamento = series.filter((x) => x.status === "Em andamento").length;
-  for (const [num, rot] of [
+  kpis("kpis-av", [
     [filmes.length, "filmes vistos juntos"],
     [series.length, "séries"],
-    [emAndamento, "série em andamento"],
-    [generos[0] ? generos[0][1] : 0, generos[0] ? `de ${generos[0][0].toLowerCase()}` : ""],
-  ]) $("kpis-av").append(el("div", { class: "contador" }, el("b", {}, String(num)), el("span", {}, rot)));
+    [emAndamento, emAndamento === 1 ? "série em andamento" : "séries em andamento"],
+    [generos[0] ? `${Math.round((generos[0][1] / filmes.length) * 100)}%` : "—", generos[0] ? `dos filmes são de ${generos[0][0].toLowerCase()}` : ""],
+  ]);
+  rosca("filmes-genero", generos, plural("filme", "filmes"), "filmes");
   if (generos[0]) $("constatacao").textContent =
     `Fica registrado que ${generos[0][1]} dos ${filmes.length} filmes são de ${generos[0][0].toLowerCase()}. A escolha do próximo segue a mesma tendência, salvo veto.`;
+  barras("series-genero", contar(series, "genero"), plural("série", "séries"));
   for (const f of [...filmes].sort((a, b) => b.ano - a.ano || a.titulo.localeCompare(b.titulo)))
-    $("filmes").append(el("tr", {}, el("td", {}, String(f.ano)), el("td", {}, f.titulo),
+    $("filmes").append(el("tr", {}, el("td", { class: "mudo" }, String(f.ano)), el("td", {}, f.titulo),
       el("td", {}, f.sub ? `${f.genero} · ${f.sub}` : f.genero), el("td", {}, f.pais)));
   for (const x of series)
-    $("series").append(el("tr", {}, el("td", {}, String(x.ano)), el("td", {}, x.titulo), el("td", {}, x.genero), el("td", {}, x.status)));
+    $("series").append(el("tr", {}, el("td", { class: "mudo" }, String(x.ano)), el("td", {}, x.titulo), el("td", {}, x.genero), el("td", {}, x.status)));
 
-  // Anexo IV: dias mais marcantes
-  for (const [parte, p] of [["contratante", eu], ["contratada", ela]]) {
-    const coluna = el("div", {}, el("h3", {}, `${parte === "contratante" ? "Contratante" : "Contratada"} · ${p.apelido}`));
+  // Anexo IV
+  for (const [parte, papel, p] of [["contratante", "Contratante", eu], ["contratada", "Contratada", ela]]) {
+    const cartao = el("div", { class: "cartao" }, el("div", { class: "rotulo" }, `${papel} · ${p.apelido}`));
     for (const d of (D.marcantes || []).filter((x) => x.parte === parte)) {
       const item = el("div", { class: "marcante" });
       if (d.data) item.append(el("div", { class: "data" }, extenso(paraData(d.data))));
       item.append(el("h4", {}, d.titulo), el("p", {}, d.texto));
       const fotos = d.data ? M.filter((m) => m.data && m.data.startsWith(d.data)) : [];
       if (fotos.length) item.append(el("div", { class: "midias" }, ...fotos.map(miniatura)));
-      coluna.append(item);
+      cartao.append(item);
     }
-    $("marcantes").append(coluna);
+    $("marcantes").append(cartao);
   }
 
   // cláusulas
-  for (const r of D.requisitos) $("requisitos").append(el("li", {}, r.texto + " — ", el("span", { class: "ok" }, "atende."), r.nota ? el("span", { class: "nota" }, " " + r.nota) : ""));
-  for (const b of D.beneficios) $("beneficios").append(el("li", {}, el("strong", {}, b.titulo + ". "), b.texto));
+  for (const r of D.requisitos)
+    $("requisitos").append(el("li", {}, el("div", {}, r.texto, el("span", { class: "status" }, "Atende"), r.nota ? el("small", {}, r.nota) : "")));
+  D.beneficios.forEach((b, i) => $("beneficios").append(el("div", { class: "cartao" },
+    el("div", { class: "rotulo" }, `Benefício ${String(i + 1).padStart(2, "0")}`), el("h3", {}, b.titulo), el("p", {}, b.texto))));
   for (const t of D.diaADia) $("dia-a-dia").append(el("li", {}, t));
   $("vigencia").textContent = D.vigencia;
   $("local-data").textContent = `São Paulo, ${extenso(hoje)}.`;
+  $("rodape").textContent = `${eu.nome} & ${ela.nome}`;
 
   // assinaturas (ficam salvas neste navegador)
   const ler = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
   const gravar = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
-  for (const [chave, p] of [["assinatura-contratante", eu], ["assinatura-contratada", ela]]) {
+  for (const [chave, papel, p] of [["assinatura-contratante", "Contratante", eu], ["assinatura-contratada", "Contratada", ela]]) {
     const linha = el("div", { class: "linha" });
     const quando = el("div", { class: "quando" });
-    const botao = el("button", { class: "assinar", type: "button" }, `Assinar como ${p.apelido}`);
-    const mostrar = (iso) => {
+    const botao = el("button", { class: "botao", type: "button" }, `Assinar como ${p.apelido}`);
+    const marcar = (iso) => {
       linha.textContent = p.apelido;
-      quando.textContent = "assinado em " + new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
+      quando.textContent = "Assinado em " + new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
       botao.hidden = true;
     };
     const salvo = ler(chave);
-    if (salvo) mostrar(salvo);
-    botao.addEventListener("click", () => { const agora = new Date().toISOString(); gravar(chave, agora); mostrar(agora); });
-    $("assinaturas").append(el("div", { class: "assinatura" }, linha, el("div", { class: "quem" }, p.nome), quando, botao));
+    if (salvo) marcar(salvo);
+    botao.addEventListener("click", () => { const agora = new Date().toISOString(); gravar(chave, agora); marcar(agora); });
+    $("assinaturas").append(el("div", { class: "assinatura" }, linha,
+      el("div", { class: "quem" }, p.nome), el("div", { class: "papel" }, papel), quando, botao));
   }
+
+  // navegação: barra de progresso e seção ativa
+  const links = [...document.querySelectorAll("#nav a")];
+  const alvos = links.map((a) => document.querySelector(a.getAttribute("href")));
+  let anterior = null;
+  const aoRolar = () => {
+    const h = document.documentElement;
+    $("progresso").style.width = `${(h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)) * 100}%`;
+    let ativo = -1;
+    alvos.forEach((t, i) => { if (t.getBoundingClientRect().top < 140) ativo = i; });
+    if (ativo === anterior) return;
+    anterior = ativo;
+    links.forEach((a, i) => a.classList.toggle("ativo", i === ativo));
+    if (ativo >= 0) $("nav").scrollTo({ left: links[ativo].offsetLeft - 16, behavior: "smooth" });
+  };
+  addEventListener("scroll", aoRolar, { passive: true });
+  aoRolar();
 })();
 </script>
 </body>
