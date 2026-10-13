@@ -55,10 +55,12 @@
   strong { font-weight: 600; }
 
   /* contadores */
-  .contadores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 8px; }
+  .contadores { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 8px; }
   .contador { border: 1px solid var(--linha); padding: 14px 10px; text-align: center; }
   .contador b { display: block; font-size: 32px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .contador span { font-size: 14px; color: var(--suave); }
+  .contador.vivo { grid-column: 1 / -1; }
+  .contador.vivo b { font-size: 28px; }
   @media (max-width: 480px) { .contadores { grid-template-columns: 1fr; } }
 
   /* linha do tempo */
@@ -117,6 +119,20 @@
   }
   button.assinar:hover { background: var(--vinho); color: var(--folha); }
   button.assinar[hidden] { display: none; }
+
+  /* cores das fatias: validadas para daltonismo, uma escala no claro e outra no escuro */
+  :root { --serie-1: #8c2f39; --serie-2: #b07d2b; --serie-3: #2a6db5; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --serie-1: #d0566a; --serie-2: #b38d24; --serie-3: #3f8ad9; } }
+  :root[data-theme="dark"] { --serie-1: #d0566a; --serie-2: #b38d24; --serie-3: #3f8ad9; }
+  .rosca { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .rosca svg { width: 160px; height: 160px; flex: none; }
+  .rosca circle:hover { opacity: .85; }
+  .rosca-total { font: 600 8px "EB Garamond", Georgia, serif; fill: var(--tinta); }
+  .legenda { list-style: none; margin: 0; padding: 0; font-size: 16px; }
+  .legenda li { display: flex; align-items: center; gap: 10px; padding: 3px 0; }
+  .legenda i { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+  .legenda b { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 6px; }
+  .legenda small { color: var(--suave); font-size: 14px; }
 
   .sumario { border: 1px solid var(--linha); padding: 14px 18px; margin: 0 0 8px; font-size: 16px; }
   .sumario b { display: block; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--vinho); font-weight: 600; margin-bottom: 4px; }
@@ -217,18 +233,16 @@
 
   <section class="anexo">
     <h2 id="a1">Anexo I <small>Indicadores</small></h2>
-    <p>Apuração feita a partir dos registros da Cláusula primeira.</p>
+    <p>Resumo do contrato até a presente data:</p>
     <div class="kpis" id="kpis"></div>
-    <div class="grafico"><h3>Dias registrados por categoria</h3><div id="por-categoria"></div></div>
-    <div class="grafico"><h3>Dias registrados por mês</h3><div id="por-mes"></div></div>
-    <p class="nota" style="font-size:15px">Cada dia conta uma vez por categoria. Datas marcantes entram no total por mês.</p>
   </section>
 
   <section class="anexo">
     <h2 id="a2">Anexo II <small>Registro gastronômico</small></h2>
     <p>Estabelecimentos visitados pelas partes durante a vigência do contrato:</p>
+    <div class="grafico"><h3>Lugares por categoria</h3><div id="lugares-categoria"></div></div>
     <table>
-      <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th><th>Pedido</th></tr></thead>
+      <thead><tr><th>Data</th><th>Lugar</th><th>Categoria</th></tr></thead>
       <tbody id="lugares"></tbody>
     </table>
   </section>
@@ -237,9 +251,9 @@
     <h2 id="a3">Anexo III <small>Registro audiovisual</small></h2>
     <p>Obras assistidas pelas partes em conjunto:</p>
     <div class="kpis" id="kpis-av"></div>
-    <div class="grafico"><h3>Filmes por gênero</h3><div id="filmes-genero"></div></div>
-    <div class="grafico"><h3>Filmes por país de origem</h3><div id="filmes-pais"></div></div>
-    <p class="nota" style="font-size:15px" id="constatacao"></p>
+    <div class="grafico"><h3>Filmes por gênero</h3><div class="rosca" id="filmes-genero"></div></div>
+    <p class="nota" style="font-size:15px;margin-top:-12px" id="constatacao"></p>
+    <div class="grafico"><h3>Séries por gênero</h3><div id="series-genero"></div></div>
     <h3 style="font-size:17px;margin:28px 0 0">Filmes</h3>
     <table>
       <thead><tr><th>Ano</th><th>Título</th><th>Gênero</th><th>País</th></tr></thead>
@@ -291,14 +305,24 @@
   $("subtitulo").textContent = `entre ${eu.apelido} e ${ela.apelido}`;
   $("partes").innerHTML = "";
   $("partes").append(
-    el("p", {}, el("strong", {}, "CONTRATANTE: "), `${eu.nome}, doravante chamado de “${eu.apelido}”.`),
-    el("p", {}, el("strong", {}, "CONTRATADA: "), `${ela.nome}, doravante chamada de “${ela.apelido}”.`),
+    el("p", {}, el("strong", {}, "CONTRATANTE: "), `${eu.nome}, vulgo “${eu.apelido}”.`),
+    el("p", {}, el("strong", {}, "CONTRATADA: "), `${ela.nome}, vulgo “${ela.apelido}”.`),
     el("p", {}, el("strong", {}, "OBJETO: "), "o namoro entre as partes."),
   );
 
   // contadores (usa os três primeiros marcos)
-  const rotulos = ["dias desde a primeira mensagem", "dias desde o primeiro date", "dias desde o primeiro “eu te amo”"];
-  D.marcos.slice(0, 3).forEach((m, i) => {
+  const vivo = el("b", {});
+  $("contadores").append(el("div", { class: "contador vivo" }, vivo, el("span", {}, "desde a primeira mensagem, e contando")));
+  const desde = paraData(D.marcos[0].data);
+  const tique = () => {
+    const t = Math.max(0, Math.floor((Date.now() - desde) / 1000));
+    const dd = Math.floor(t / 86400), hh = Math.floor(t / 3600) % 24, mm = Math.floor(t / 60) % 60, ss = t % 60;
+    const z = (n) => String(n).padStart(2, "0");
+    vivo.textContent = `${dd} dias, ${z(hh)} h ${z(mm)} min ${z(ss)} s`;
+  };
+  tique(); setInterval(tique, 1000);
+  const rotulos = ["dias desde o primeiro date", "dias desde o primeiro “eu te amo”"];
+  D.marcos.slice(1, 3).forEach((m, i) => {
     $("contadores").append(el("div", { class: "contador" }, el("b", {}, String(diasDesde(m.data))), el("span", {}, rotulos[i] || m.titulo)));
   });
 
@@ -358,17 +382,40 @@
   else $("secao-album").remove();
 
   // Anexo I: indicadores
-  const datados = M.filter((m) => m.data);
-  const diasPor = (chave) => {
-    const grupos = new Map();
-    for (const m of datados) {
-      const k = chave(m); if (!k) continue;
-      if (!grupos.has(k)) grupos.set(k, new Set());
-      grupos.get(k).add(m.data.slice(0, 10));
-    }
-    return grupos;
+  // Rosca: até 3 fatias com cores validadas (claro e escuro); acima disso, agrupa em "Outros".
+  const rosca = (alvo, linhas, unidade) => {
+    if (linhas.length > 3) linhas = [...linhas.slice(0, 2), ["Outros", linhas.slice(2).reduce((t, [, v]) => t + v, 0)]];
+    const total = linhas.reduce((t, [, v]) => t + v, 0) || 1;
+    const NS = "http://www.w3.org/2000/svg", r = 15.915, svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 42 42"); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", linhas.map(([k, v]) => `${k}: ${v}`).join(", "));
+    const legenda = el("ul", { class: "legenda" });
+    let acumulado = 0;
+    linhas.forEach(([rotulo, v], i) => {
+      const fatia = (v / total) * 100;
+      const c = document.createElementNS(NS, "circle");
+      for (const [k, val] of Object.entries({ cx: 21, cy: 21, r, fill: "none", "stroke-width": 7,
+        stroke: `var(--serie-${i + 1})`, "stroke-dasharray": `${fatia} ${100 - fatia}`, "stroke-dashoffset": 25 - acumulado }))
+        c.setAttribute(k, val);
+      const t = document.createElementNS(NS, "title"); t.textContent = `${rotulo}: ${v} ${unidade(v)}`; c.append(t);
+      svg.append(c);
+      // separador de 2px entre fatias, na cor do papel
+      const sep = document.createElementNS(NS, "line");
+      const ang = ((acumulado / 100) * 360 - 90) * Math.PI / 180;
+      for (const [k, val] of Object.entries({ x1: 21 + 11.4 * Math.cos(ang), y1: 21 + 11.4 * Math.sin(ang),
+        x2: 21 + 20.4 * Math.cos(ang), y2: 21 + 20.4 * Math.sin(ang), stroke: "var(--folha)", "stroke-width": .6 }))
+        sep.setAttribute(k, val);
+      if (linhas.length > 1) svg.append(sep);
+      acumulado += fatia;
+      legenda.append(el("li", {}, el("i", { style: `background:var(--serie-${i + 1})` }),
+        el("span", {}, rotulo), el("b", {}, `${v}`), el("small", {}, ` ${Math.round((v / total) * 100)}%`)));
+    });
+    const centro = document.createElementNS(NS, "text");
+    for (const [k, val] of Object.entries({ x: 21, y: 22.6, "text-anchor": "middle", class: "rosca-total" })) centro.setAttribute(k, val);
+    centro.textContent = String(total); svg.append(centro);
+    $(alvo).append(svg, legenda);
   };
-  const barras = (alvo, linhas, unidade = (v) => (v === 1 ? "dia" : "dias")) => {
+  const barras = (alvo, linhas, unidade) => {
     const max = Math.max(...linhas.map(([, v]) => v), 1);
     for (const [rotulo, v] of linhas) {
       const dica = `${rotulo}: ${v} ${unidade(v)}`;
@@ -378,33 +425,22 @@
         el("span", { class: "num" }, String(v))));
     }
   };
-  const porCategoria = [...diasPor((m) => m.categoria)].map(([k, s]) => [k, s.size]).sort((a, b) => b[1] - a[1]);
-  barras("por-categoria", porCategoria);
-
-  const todosOsDias = new Set([...datados.map((m) => m.data.slice(0, 10)), ...D.marcos.map((m) => m.data)]);
-  const porMes = new Map();
-  const inicio = paraData(D.marcos[0].data);
-  for (let d = new Date(inicio.getFullYear(), inicio.getMonth(), 1); d <= hoje; d.setMonth(d.getMonth() + 1)) {
-    porMes.set(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`, 0);
-  }
-  for (const dia of todosOsDias) { const k = dia.slice(0, 7); if (porMes.has(k)) porMes.set(k, porMes.get(k) + 1); }
-  const nomeMes = (k) => { const n = MESES[Number(k.slice(5)) - 1]; return n[0].toUpperCase() + n.slice(1); };
-  barras("por-mes", [...porMes].map(([k, v]) => [nomeMes(k), v]));
-
   const lugares = D.lugares || [];
   for (const [num, rot] of [
     [diasDesde(D.marcos[0].data), "dias de contrato"],
-    [todosOsDias.size, "dias registrados"],
     [M.length, "fotos e vídeos"],
     [lugares.length, "lugares visitados"],
+    [(D.filmes || []).length, "filmes vistos juntos"],
   ]) $("kpis").append(el("div", { class: "contador" }, el("b", {}, String(num)), el("span", {}, rot)));
 
   // Anexo II: registro gastronômico
-  for (const l of [...lugares].sort((a, b) => a.data.localeCompare(b.data))) {
-    const dt = paraData(l.data);
+  // com data primeiro (em ordem), depois os sem data em ordem alfabética
+  const ordemLugar = (a, b) => (a.data ? 0 : 1) - (b.data ? 0 : 1) || (a.data || "").localeCompare(b.data || "") || a.nome.localeCompare(b.nome);
+  for (const l of [...lugares].sort(ordemLugar)) {
+    const dt = l.data && paraData(l.data);
     $("lugares").append(el("tr", {},
-      el("td", {}, `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}`),
-      el("td", {}, l.nome), el("td", {}, l.tipo || ""), el("td", {}, l.pedido || "")));
+      el("td", {}, dt ? `${String(dt.getDate()).padStart(2, "0")}/${String(dt.getMonth() + 1).padStart(2, "0")}` : "—"),
+      el("td", {}, l.nome), el("td", {}, l.tipo || "")));
   }
 
   // Anexo III: registro audiovisual
@@ -414,10 +450,10 @@
     for (const x of lista) c.set(x[campo], (c.get(x[campo]) || 0) + 1);
     return [...c].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
   };
-  const barrasFilmes = (alvo, linhas) => barras(alvo, linhas, (v) => (v === 1 ? "filme" : "filmes"));
+  barras("lugares-categoria", contar(lugares, "tipo"), (v) => (v === 1 ? "lugar" : "lugares"));
   const generos = contar(filmes, "genero");
-  barrasFilmes("filmes-genero", generos);
-  barrasFilmes("filmes-pais", contar(filmes, "pais"));
+  rosca("filmes-genero", generos, (v) => (v === 1 ? "filme" : "filmes"));
+  barras("series-genero", contar(series, "genero"), (v) => (v === 1 ? "série" : "séries"));
   const emAndamento = series.filter((x) => x.status === "Em andamento").length;
   for (const [num, rot] of [
     [filmes.length, "filmes vistos juntos"],

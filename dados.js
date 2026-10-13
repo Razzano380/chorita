@@ -26,7 +26,7 @@ window.DADOS = {
     { titulo: "Flores", texto: "Lírios e tulipas, sem necessidade de data comemorativa." },
     { titulo: "Frutas", texto: "Jabuticaba e mexerica durante a safra. Mexerica entregue descascada." },
     { titulo: "Trilha sonora", texto: "Acesso irrestrito a “A Horse with No Name”, inclusive no trânsito." },
-    { titulo: "Refeições", texto: "Feijoada, hambúrguer e drinks, conforme disponibilidade de mesa." },
+    { titulo: "Refeições", texto: "Rodízio entre os estabelecimentos do Anexo II e novos a descobrir, com direito de veto da contratada." },
   ],
 
   diaADia: [
@@ -37,10 +37,23 @@ window.DADOS = {
     "Avisar quando chegar em casa.",
   ],
 
-  // Anexo II. "tipo" vira a categoria da tabela.
+  // Anexo II. "tipo" vira a categoria do gráfico. "data" é opcional (AAAA-MM-DD).
   lugares: [
-    { data: "2026-09-02", nome: "Holy Burger", tipo: "Hambúrguer", pedido: "Hambúrguer e drinks no balcão" },
-    { data: "2026-09-19", nome: "Restaurante a confirmar", tipo: "Comida brasileira", pedido: "Feijoada e suco" },
+    { nome: "Holy Burger", tipo: "Lanches", data: "2026-09-02" },
+    { nome: "Merenda da Cidade", tipo: "Brasileira", data: "2026-09-19" },
+    { nome: "Baeta Bar", tipo: "Bar" },
+    { nome: "Cinema", tipo: "Cinema" },
+    { nome: "Rong He", tipo: "Asiática" },
+    { nome: "Pizzaria da Mooca", tipo: "Italiana" },
+    { nome: "Espaço Kazu", tipo: "Asiática" },
+    { nome: "Cangote", tipo: "Sorveteria" },
+    { nome: "Copanzinho", tipo: "Bar" },
+    { nome: "Mercadão", tipo: "Brasileira" },
+    { nome: "Zé Bolinho", tipo: "Lanches" },
+    { nome: "Zdeli", tipo: "Lanches" },
+    { nome: "La Pasta Gialla", tipo: "Italiana" },
+    { nome: "Ó Pro Cê Vê", tipo: "Bar" },
+    { nome: "Prainha", tipo: "Brasileira" },
   ],
 
   // Anexo III. "genero" alimenta o gráfico; "pais" também.

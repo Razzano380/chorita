@@ -10,7 +10,7 @@ window.MIDIA = [
   {"arquivo": "midia/foto08.jpg", "tipo": "foto", "data": "2026-09-11", "legenda": "Flores", "categoria": "Em casa"},
   {"arquivo": "midia/foto09.jpg", "tipo": "foto", "data": "2026-09-12", "legenda": "Provando óculos", "categoria": "Passeios"},
   {"arquivo": "midia/foto06.jpg", "tipo": "foto", "data": "2026-09-19", "legenda": "De mãos dadas na loja", "categoria": "Passeios"},
-  {"arquivo": "midia/foto07.jpg", "tipo": "foto", "data": "2026-09-19", "legenda": "Feijoada", "categoria": "Comida"},
+  {"arquivo": "midia/foto07.jpg", "tipo": "foto", "data": "2026-09-19", "legenda": "Almoço no Merenda da Cidade", "categoria": "Comida"},
   {"arquivo": "midia/video-1909.mp4", "tipo": "video", "capa": "midia/video-1909.jpg", "data": "2026-09-19T03:27", "legenda": "3h27 da manhã", "categoria": "Em casa"},
   {"arquivo": "midia/foto03.jpg", "tipo": "foto", "data": "2026-09-26", "legenda": "Noite no parque", "categoria": "Passeios"},
   {"arquivo": "midia/foto04.jpg", "tipo": "foto", "data": "2026-09-26", "legenda": "Espelho do ônibus", "categoria": "Passeios"},
