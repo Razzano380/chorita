@@ -67,6 +67,7 @@ window.DADOS = {
     { titulo: "Sorria (Smile)", ano: 2022, genero: "Terror", sub: "Sobrenatural", pais: "EUA" },
     { titulo: "Quando o Mal Espreita (When Evil Lurks)", ano: 2023, genero: "Terror", sub: "Possessão", pais: "Argentina" },
     { titulo: "Obsession", ano: 2026, genero: "Terror", sub: "Psicológico", pais: "EUA" },
+    { titulo: "Casamento Sangrento (Ready or Not)", ano: 2019, genero: "Terror", sub: "Comédia de terror", pais: "EUA" },
     { titulo: "Oldboy", ano: 2003, genero: "Suspense", sub: "Vingança", pais: "Coreia do Sul" },
   ],
   series: [
