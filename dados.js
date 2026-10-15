@@ -18,11 +18,25 @@ window.DADOS = {
 
   requisitos: [
     { texto: "Gostar de bala de leite" },
-    { texto: "Ter uma música de conforto", nota: "“A Horse with No Name”, America (1971)." },
+    { texto: "Ter uma música de conforto", nota: "A dela: “A Horse with No Name”, America (1971). A dele: “Dog Days Are Over”, Florence + The Machine (2008)." },
     { texto: "Topar foto em qualquer espelho", nota: "Inclusive de ônibus." },
     { texto: "Fazer careta na hora da foto", nota: "Comprovado por farto material fotográfico." },
-    { texto: "Topar fantasia combinando", nota: "Ver Anexo I." },
+    { texto: "Topar fantasia combinando", nota: "Ver Cláusula 1ª, 4 de outubro." },
     { texto: "Saber escolher jabuticaba" },
+  ],
+
+  // Compromissos assumidos pelo contratante (Cláusula 2ª, parágrafo único).
+  compromissos: [
+    { texto: "Arrumar a casa dela", nota: "Sempre." },
+    { texto: "Fazer carinho nas costas dela antes de ela dormir" },
+    { texto: "Comprar petiscos para o Levi", nota: "Gato da contratada e beneficiário indireto deste contrato." },
+    { texto: "Levar docinhos", nota: "Bala de leite incluída." },
+    { texto: "Jogar Overwatch e outros joguinhos com ela" },
+    { texto: "Dizer palavras de afirmação", nota: "Para que ela se sinta sempre segura." },
+    { texto: "Respeitá-la", nota: "Em todas as circunstâncias." },
+    { texto: "Fazê-la dar risada", nota: "Sempre." },
+    { texto: "Sair para conhecer lugares novos", nota: "Ver Anexo II." },
+    { texto: "Viajar juntos e planejar coisas" },
   ],
 
   beneficios: [
