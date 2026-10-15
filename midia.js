@@ -1,6 +1,7 @@
 // Gerado por extrair_metadados.py. "data" vem do EXIF/metadado do arquivo.
 // Pode editar "legenda" e "data" à mão: o script preserva o que você escreveu.
 window.MIDIA = [
+  {"arquivo": "midia/foto19.jpg", "tipo": "foto", "data": "2026-06-25", "legenda": "Primeiro encontro", "categoria": "Em casa"},
   {"arquivo": "midia/foto18.jpg", "tipo": "foto", "data": "2026-08-15", "legenda": "Espelho da farmácia", "categoria": "Passeios"},
   {"arquivo": "midia/foto17.jpg", "tipo": "foto", "data": "2026-08-17", "legenda": "Na pista, de olho de peixe", "categoria": "Passeios"},
   {"arquivo": "midia/foto16.jpg", "tipo": "foto", "data": "2026-07-30", "legenda": "No elevador", "categoria": "Passeios"},
